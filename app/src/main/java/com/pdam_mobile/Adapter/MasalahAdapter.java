@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pdam_mobile.Model.Masalah;
 import com.pdam_mobile.Model.MasalahModel;
 import com.pdam_mobile.R;
 
@@ -16,10 +15,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class MasalahAdapter extends RecyclerView.Adapter<MasalahAdapter.ViewHolder> {
-    private List<Masalah> masalahList;
+    private List<MasalahModel> masalahDataList;
 
-    public MasalahAdapter(List<Masalah> masalahList) {
-        this.masalahList = masalahList;
+    public MasalahAdapter(List<MasalahModel> masalahDataList) {
+        this.masalahDataList = masalahDataList;
     }
 
     @NonNull
@@ -31,19 +30,19 @@ public class MasalahAdapter extends RecyclerView.Adapter<MasalahAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NotNull MasalahAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.mTxtNoInfo.setText(masalahList.get(i).getNo_info());
-        viewHolder.mTxtWilayah.setText(masalahList.get(i).getWilayah());
-        viewHolder.mTxtHari.setText(masalahList.get(i).getHari());
-        viewHolder.mTxtTanggal.setText(masalahList.get(i).getTanggal());
-        viewHolder.mTxtEstimasi.setText(masalahList.get(i).getEstimasi());
-        viewHolder.mTxtKerusakan.setText(masalahList.get(i).getKerusakan());
-        viewHolder.mTxtAlternatif.setText(masalahList.get(i).getAlternatif());
-        viewHolder.mTxtPenanganan.setText(masalahList.get(i).getPenanganan());
+        viewHolder.mTxtNoInfo.setText(masalahDataList.get(i).getNo_info());
+        viewHolder.mTxtWilayah.setText(masalahDataList.get(i).getWilayah());
+        viewHolder.mTxtHari.setText(masalahDataList.get(i).getHari());
+        viewHolder.mTxtTanggal.setText(masalahDataList.get(i).getTanggal());
+        viewHolder.mTxtEstimasi.setText(masalahDataList.get(i).getEstimasi());
+        viewHolder.mTxtKerusakan.setText(masalahDataList.get(i).getKerusakan());
+        viewHolder.mTxtAlternatif.setText(masalahDataList.get(i).getAlternatif());
+        viewHolder.mTxtPenanganan.setText(masalahDataList.get(i).getPenanganan());
     }
 
     @Override
     public int getItemCount() {
-        return masalahList.size();
+        return masalahDataList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
