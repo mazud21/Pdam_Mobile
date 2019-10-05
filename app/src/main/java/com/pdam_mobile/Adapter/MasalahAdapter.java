@@ -30,7 +30,7 @@ public class MasalahAdapter extends RecyclerView.Adapter<MasalahAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NotNull MasalahAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.mTxtNoInfo.setText(masalahDataList.get(i).getNo_info());
+        //viewHolder.mTxtNoInfo.setText(masalahDataList.get(i).getNo_info());
         viewHolder.mTxtWilayah.setText(masalahDataList.get(i).getWilayah());
         viewHolder.mTxtHari.setText(masalahDataList.get(i).getHari());
         viewHolder.mTxtTanggal.setText(masalahDataList.get(i).getTanggal());
@@ -50,7 +50,7 @@ public class MasalahAdapter extends RecyclerView.Adapter<MasalahAdapter.ViewHold
 
         ViewHolder( View itemView) {
             super(itemView);
-            mTxtNoInfo = (TextView) itemView.findViewById(R.id.txtNoInfo);
+            //mTxtNoInfo = (TextView) itemView.findViewById(R.id.txtNoInfo);
             mTxtWilayah = (TextView) itemView.findViewById(R.id.txtWilayah);
             mTxtHari = (TextView) itemView.findViewById(R.id.txtHari);
             mTxtTanggal = (TextView) itemView.findViewById(R.id.txtTanggal);

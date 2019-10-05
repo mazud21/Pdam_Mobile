@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="8dp"
         >
@@ -266,8 +266,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tambah Info Masalah"
+            android:background="@color/colorPrimary"
+            />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kembali"
+            android:background="#C0C0C0"
             />
 
     </LinearLayout>
+
+
 
 </LinearLayout>

@@ -3,8 +3,10 @@ package com.pdam_mobile.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class MasalahModel {
+    /*
     @SerializedName("no_info")
     private String no_info;
+    */
     @SerializedName("wilayah")
     private String wilayah;
     @SerializedName("hari")
@@ -68,14 +70,16 @@ public class MasalahModel {
         this.penanganan = penanganan;
     }
 
+    /*
     public String getNo_info() {
         return no_info;
     }
+    */
 
     public MasalahModel(){}
 
     public MasalahModel(String no_info, String wilayah, String hari, String tanggal, String estimasi, String kerusakan, String alternatif, String penanganan) {
-        this.no_info = no_info;
+        //this.no_info = no_info;
         this.wilayah = wilayah;
         this.hari = hari;
         this.tanggal = tanggal;
@@ -85,9 +89,11 @@ public class MasalahModel {
         this.penanganan = penanganan;
     }
 
+    /*
     public void setNo_info(String no_info) {
         this.no_info = no_info;
     }
+    */
 
     public String getWilayah() {
         return wilayah;

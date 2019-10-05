@@ -6,6 +6,7 @@ import com.pdam_mobile.Model.PelangganData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
@@ -13,6 +14,7 @@ public interface ApiInterface {
     @GET("Pdam_masalah")
     Call<MasalahData> masalahData();
 
+    @FormUrlEncoded
     @POST("Pdam_masalah")
     Call<CrudMasalahData> crudMasalahData(@Field("wilayah") String wilayah,
                                           @Field("hari") String hari,

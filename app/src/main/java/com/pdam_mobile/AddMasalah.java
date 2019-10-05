@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pdam_mobile.Model.CrudMasalahData;
+import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 
 import retrofit2.Call;
@@ -16,7 +17,7 @@ import retrofit2.Response;
 
 public class AddMasalah extends AppCompatActivity {
     EditText etWilayah, etHari, etTanggal, etEstimasi, etKerusakan, etAlternatif, etPenanganan;
-    Button btnTambahMasalah;
+    Button btnTambahMasalah, btnBack;
     ApiInterface apiInterface;
 
     @Override
@@ -32,7 +33,10 @@ public class AddMasalah extends AppCompatActivity {
         etAlternatif = (EditText) findViewById(R.id.etAlternatif);
         etPenanganan = (EditText) findViewById(R.id.etPenanganan);
 
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
         btnTambahMasalah = (Button) findViewById(R.id.btnTambahMasalah);
+        btnBack = (Button) findViewById(R.id.btnBack);
 
         btnTambahMasalah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +67,13 @@ public class AddMasalah extends AppCompatActivity {
             }
         });
 
-        
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.mainActivity.refresh();
+                finish();
+            }
+        });
+
     }
 }
