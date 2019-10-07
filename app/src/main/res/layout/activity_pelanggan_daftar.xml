@@ -5,18 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#3F51B5"
     tools:context=".PelangganDaftar">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_margin="8dp">
+            >
 
             <ImageView
                 android:id="@+id/iconFB"
@@ -30,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorHint"
                 >
 
                 <EditText
@@ -39,14 +42,15 @@
                     android:layout_height="wrap_content"
                     android:hint="Nomor KTP"
                     android:maxLines="1"
-                    android:backgroundTint="#ffff"/>
+                    android:textColor="@color/colorHint"
+                    android:backgroundTint="@color/colorAccent"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorHint"
                 >
 
                 <EditText
@@ -55,14 +59,15 @@
                     android:layout_height="wrap_content"
                     android:hint="Nama"
                     android:maxLines="1"
-                    android:backgroundTint="#ffff"
+                    android:textColor="@color/colorHint"
+                    android:backgroundTint="@color/colorAccent"
                     />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorHint"
                 >
 
                 <EditText
@@ -71,14 +76,15 @@
                     android:layout_height="wrap_content"
                     android:hint="Email"
                     android:maxLines="1"
-                    android:backgroundTint="#ffff"
+                    android:textColor="@color/colorHint"
+                    android:backgroundTint="@color/colorAccent"
                     />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorHint"
                 >
 
                 <EditText
@@ -87,7 +93,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Nomor HP"
                     android:maxLines="1"
-                    android:backgroundTint="#ffff"
+                    android:textColor="@color/colorHint"
+                    android:backgroundTint="@color/colorAccent"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -99,27 +106,45 @@
                 android:layout_marginLeft="4dp"
                 />
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#ffff"
-                >
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/etAlamat"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Koordinat Peta"
-                    android:maxLines="1"
-                    android:backgroundTint="#ffff"
-                    android:clickable="false"
-                    />
-            </android.support.design.widget.TextInputLayout>
+                    android:textColorHint="@color/colorHint"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/etAlamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Koordinat Peta"
+                        android:maxLines="1"
+                        android:textColor="@color/colorHint"
+                        android:backgroundTint="@color/colorAccent"
+                        android:clickable="false"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/ibMyLoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_my_location_white_24dp"
+                    android:background="@color/colorPrimary"
+                    android:layout_weight="0"/>
+
+            </LinearLayout>
+
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorHint"
                 >
 
                 <EditText
@@ -128,7 +153,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Foto KTP"
                     android:maxLines="1"
-                    android:backgroundTint="#ffff"
+                    android:textColor="@color/colorHint"
+                    android:backgroundTint="@color/colorAccent"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -141,7 +167,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorHint"
                 >
 
                 <EditText
@@ -150,7 +176,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Pilih Tarif Air"
                     android:maxLines="1"
-                    android:backgroundTint="#ffff"
+                    android:textColor="@color/colorHint"
+                    android:backgroundTint="@color/colorAccent"
                     />
             </android.support.design.widget.TextInputLayout>
 

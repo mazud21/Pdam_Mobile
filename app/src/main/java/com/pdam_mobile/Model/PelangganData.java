@@ -5,10 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class PelangganData {
+
     @SerializedName("status")
     String status;
     @SerializedName("data")
-    PelangganModel pelangganModel;
+    List<PelangganModel> pelangganModelList;
 
     public String getStatus() {
         return status;
@@ -18,11 +19,11 @@ public class PelangganData {
         this.status = status;
     }
 
-    public PelangganModel getPelangganModel() {
-        return pelangganModel;
+    public List<PelangganModel> getPelangganModelList() {
+        return pelangganModelList;
     }
 
-    public void setPelangganModel(PelangganModel pelangganModel) {
-        this.pelangganModel = pelangganModel;
+    public void setPelangganModelList(List<PelangganModel> pelangganModelList) {
+        this.pelangganModelList = pelangganModelList;
     }
 }
