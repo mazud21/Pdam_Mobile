@@ -92,6 +92,8 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             }
         });
 
+        //get selected data from spinner NOT FIXED
+
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
