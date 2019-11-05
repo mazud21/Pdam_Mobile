@@ -4,6 +4,7 @@ import com.pdam_mobile.Model.CrudMasalahData;
 import com.pdam_mobile.Model.MasalahData;
 import com.pdam_mobile.Model.PelangganData;
 import com.pdam_mobile.Model.PelangganReg;
+import com.pdam_mobile.Model.TarifData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -40,4 +41,6 @@ public interface ApiInterface {
                                     @Field("pilih_tarif") String pilih_tarif
     );
 
+    @GET("Pdam_tarif")
+    Call<TarifData> getTarifData();
 }

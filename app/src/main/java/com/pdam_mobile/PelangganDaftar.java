@@ -1,6 +1,7 @@
 package com.pdam_mobile;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -9,8 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,10 +27,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.pdam_mobile.Model.PelangganData;
 import com.pdam_mobile.Model.PelangganReg;
+import com.pdam_mobile.Model.TarifData;
+import com.pdam_mobile.Model.TarifModel;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -42,6 +49,9 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
 
     GoogleMap mMap;
     Geocoder geo;
+
+    Spinner spinner;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +74,23 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         btnDaftar = (Button) findViewById(R.id.btnDaftar);
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        spinner = (Spinner) findViewById(R.id.spTarif);
+        context = this;
+        apiInterface = ApiClient.getApiInterface();
+        initSpinnerTarif();
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedName = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,4 +168,33 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             }
         });
     }
+
+    private void initSpinnerTarif() {
+        apiInterface.getTarifData().enqueue(new Callback<TarifData>() {
+            @Override
+            public void onResponse(Call<TarifData> call, Response<TarifData> response) {
+                if (response.isSuccessful()) {
+                    List<TarifModel> tarifModels = response.body().getTarifDataList();
+                    List<String> listSpinner = new ArrayList<String>();
+                    for (int i = 0; i < tarifModels.size(); i++) {
+                        listSpinner.add(tarifModels.get(i).getKet_tarif());
+                    }
+                    // Set hasil result json ke dalam adapter spinner
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            android.R.layout.simple_spinner_item, listSpinner);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+
+                } else {
+                    Toast.makeText(context, "Gagal mengambil data tarif", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TarifData> call, Throwable t) {
+                Toast.makeText(context, "Koneksi internet bermasalah", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
