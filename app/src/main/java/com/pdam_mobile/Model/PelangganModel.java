@@ -3,8 +3,7 @@ package com.pdam_mobile.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class PelangganModel {
-    @SerializedName("no_daftar")
-    private String no_daftar;
+
     @SerializedName("no_ktp")
     private String no_ktp;
     @SerializedName("nama")
@@ -20,8 +19,7 @@ public class PelangganModel {
     @SerializedName("pilih_tarif")
     private String pilih_tarif;
 
-    public PelangganModel(String no_daftar, String no_ktp, String nama, String alamat, String email, String no_hp, String foto_ktp, String pilih_tarif) {
-        this.no_daftar = no_daftar;
+    public PelangganModel(String no_ktp, String nama, String alamat, String email, String no_hp, String foto_ktp, String pilih_tarif) {
         this.no_ktp = no_ktp;
         this.nama = nama;
         this.alamat = alamat;
@@ -29,14 +27,6 @@ public class PelangganModel {
         this.no_hp = no_hp;
         this.foto_ktp = foto_ktp;
         this.pilih_tarif = pilih_tarif;
-    }
-
-    public String getNo_daftar() {
-        return no_daftar;
-    }
-
-    public void setNo_daftar(String no_daftar) {
-        this.no_daftar = no_daftar;
     }
 
     public String getNo_ktp() {
