@@ -43,14 +43,14 @@ import retrofit2.Response;
 
 public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallback {
 
-    EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp, etFotoKtp, etTarif;
+    EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp, etFotoKtp;
     Button btnDaftar;
     ApiInterface apiInterface;
 
     GoogleMap mMap;
     Geocoder geo;
 
-    Spinner spinner;
+    Spinner etTarif;
     Context context;
 
     @Override
@@ -64,7 +64,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         etEmail = (EditText) findViewById(R.id.etEmail);
         etNoHp = (EditText) findViewById(R.id.etNoHp);
         etFotoKtp = (EditText) findViewById(R.id.etFotoKtp);
-        etTarif = (EditText) findViewById(R.id.etTarif);
+        //etTarif = (EditText) findViewById(R.id.etTarif);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -75,15 +75,16 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        spinner = (Spinner) findViewById(R.id.spTarif);
+        etTarif = (Spinner) findViewById(R.id.etTarif);
         context = this;
         apiInterface = ApiClient.getApiInterface();
         initSpinnerTarif();
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        etTarif.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedName = adapterView.getItemAtPosition(i).toString();
+                //etTarif.getSelectedItem().toString();
             }
 
             @Override
@@ -105,7 +106,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                                 etEmail.getText().toString(),
                                 etNoHp.getText().toString(),
                                 etFotoKtp.getText().toString(),
-                                etTarif.getText().toString()
+                                etTarif.getSelectedItem().toString()
                                 );
 
                 pelangganRegCall.enqueue(new Callback<PelangganReg>() {
@@ -179,13 +180,13 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                     List<TarifModel> tarifModels = response.body().getTarifDataList();
                     List<String> listSpinner = new ArrayList<String>();
                     for (int i = 0; i < tarifModels.size(); i++) {
-                        listSpinner.add(tarifModels.get(i).getKet_tarif());
+                        listSpinner.add(tarifModels.get(i).getId_tarif_air());
                     }
                     // Set hasil result json ke dalam adapter spinner
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_spinner_item, listSpinner);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
+                    etTarif.setAdapter(adapter);
 
                 } else {
                     Toast.makeText(context, "Gagal mengambil data tarif", Toast.LENGTH_SHORT).show();
