@@ -3,6 +3,7 @@ package com.pdam_mobile;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -85,6 +87,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedName = adapterView.getItemAtPosition(i).toString();
                 //etTarif.getSelectedItem().toString();
+                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override

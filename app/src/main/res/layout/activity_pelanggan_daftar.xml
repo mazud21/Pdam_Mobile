@@ -153,13 +153,20 @@
                 android:src="@mipmap/ic_launcher"
                 />
 
-            <!--android.support.design.widget.TextInputLayout
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorHint"
                 >
 
-                <EditText
+                <Spinner
+                    android:id="@+id/etTarif"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:backgroundTint="@color/colorAccent"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    />
+                <!--EditText
                     android:id="@+id/etTarif"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -167,15 +174,10 @@
                     android:maxLines="1"
                     android:textColor="@color/colorHint"
                     android:backgroundTint="@color/colorAccent"
-                    />
-            </android.support.design.widget.TextInputLayout-->
+                    /-->
+            </android.support.design.widget.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/etTarif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                />
 
             <Button
                 android:id="@+id/btnDaftar"
