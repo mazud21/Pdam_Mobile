@@ -5,9 +5,11 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,6 +96,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         imgKtp = findViewById(R.id.imgKtp);
 
         pd = new ProgressDialog(this);
+        pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
         pd.setMessage("loading ... ");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
