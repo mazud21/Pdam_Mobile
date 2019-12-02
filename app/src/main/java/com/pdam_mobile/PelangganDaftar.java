@@ -1,20 +1,25 @@
 package com.pdam_mobile;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,18 +32,29 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import com.pdam_mobile.Model.PelangganData;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.pdam_mobile.Model.PelangganReg;
 import com.pdam_mobile.Model.TarifData;
 import com.pdam_mobile.Model.TarifModel;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +62,7 @@ import retrofit2.Response;
 public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallback {
 
     EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp, etFotoKtp;
+    ImageView imgKtp;
     Button btnDaftar;
     ApiInterface apiInterface;
 
@@ -55,18 +72,28 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
     Spinner etTarif;
     Context context;
 
+    String part_image;
+    ProgressDialog pd;
+    final int REQUEST_GALLERY = 9544;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelanggan_daftar);
 
-        etNoKtp = (EditText) findViewById(R.id.etNoKtp);
-        etNama = (EditText) findViewById(R.id.etNama);
-        etAlamat = (EditText) findViewById(R.id.etAlamat);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etNoHp = (EditText) findViewById(R.id.etNoHp);
-        etFotoKtp = (EditText) findViewById(R.id.etFotoKtp);
+        requestMultiplePermissions();
+
+        etNoKtp = findViewById(R.id.etNoKtp);
+        etNama = findViewById(R.id.etNama);
+        etAlamat = findViewById(R.id.etAlamat);
+        etEmail = findViewById(R.id.etEmail);
+        etNoHp = findViewById(R.id.etNoHp);
+        //etFotoKtp = (EditText) findViewById(R.id.etFotoKtp);
         //etTarif = (EditText) findViewById(R.id.etTarif);
+        imgKtp = findViewById(R.id.imgKtp);
+
+        pd = new ProgressDialog(this);
+        pd.setMessage("loading ... ");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -82,22 +109,52 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         apiInterface = ApiClient.getApiInterface();
         initSpinnerTarif();
 
-        etTarif.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        imgKtp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedName = adapterView.getItemAtPosition(i).toString();
-                //etTarif.getSelectedItem().toString();
-                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"open gallery"),REQUEST_GALLERY);
             }
         });
 
-        //get selected data from spinner NOT FIXED
+        btnDaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pd.show();
 
+                HashMap<String, RequestBody> map = new HashMap<String, RequestBody>();
+                map.put("no_ktp", createPartFromString(etNoKtp.getText().toString()));
+                map.put("nama", createPartFromString(etNama.getText().toString()));
+                map.put("alamat", createPartFromString(etAlamat.getText().toString()));
+                map.put("email", createPartFromString(etEmail.getText().toString()));
+                map.put("no_hp", createPartFromString(etNoHp.getText().toString()));
+                map.put("pilih_tarif", createPartFromString(etTarif.getSelectedItem().toString()));
+
+                File imagefile = new File(part_image);
+                RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"),imagefile);
+                MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(),reqBody);
+
+                apiInterface = ApiClient.getApiInterface();
+                Call<PelangganReg> pelangganRegCall = apiInterface.uploadImg(partImage, map);
+                pelangganRegCall.enqueue(new Callback<PelangganReg>() {
+                    @Override
+                    public void onResponse(Call<PelangganReg> call, Response<PelangganReg> response) {
+                        pd.dismiss();
+                        Toast.makeText(PelangganDaftar.this, "Data pendaftaran terkirim", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<PelangganReg> call, Throwable t) {
+                        Toast.makeText(PelangganDaftar.this, "Data pendaftaran gagal terkirim", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
+        //start daftar tanpa image
+        /*
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +188,93 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 });
             }
         });
+         */
+        //end daftar tanpa image
 
+        //get tarif spinner
+        etTarif.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedName = adapterView.getItemAtPosition(i).toString();
+                //etTarif.getSelectedItem().toString();
+                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    //permission for allowing external storage
+    private void requestMultiplePermissions(){
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            //openSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Some Error! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK)
+        {
+            if(requestCode == REQUEST_GALLERY)
+            {
+                Uri dataimage = data.getData();
+                String[] imageprojection = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(dataimage,imageprojection,null,null,null);
+
+                if (cursor != null)
+                {
+                    cursor.moveToFirst();
+                    int indexImage = cursor.getColumnIndex(imageprojection[0]);
+                    part_image = cursor.getString(indexImage);
+
+                    if(part_image != null)
+                    {
+                        File image = new File(part_image);
+                        imgKtp.setImageBitmap(BitmapFactory.decodeFile(image.getAbsolutePath()));
+                    }
+                }
+            }
+        }
+    }
+
+    private RequestBody createPartFromString(String s) {
+
+        return RequestBody.create(okhttp3.MultipartBody.FORM, s);
     }
 
     @Override

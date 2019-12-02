@@ -6,11 +6,18 @@ import com.pdam_mobile.Model.PelangganData;
 import com.pdam_mobile.Model.PelangganReg;
 import com.pdam_mobile.Model.TarifData;
 
+import java.util.Map;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 public interface ApiInterface {
     @GET("Pdam_masalah")
@@ -30,6 +37,7 @@ public interface ApiInterface {
     @GET("Pdam_pelanggan")
     Call<PelangganData> pelangganData();
 
+    /*
     @FormUrlEncoded
     @POST("Pdam_pelanggan")
     Call<PelangganReg> pelangganReg(@Field("no_ktp") String no_ktp,
@@ -40,6 +48,13 @@ public interface ApiInterface {
                                     @Field("foto_ktp") String foto_ktp,
                                     @Field("pilih_tarif") String pilih_tarif
     );
+
+     */
+
+    @Multipart
+    @POST("Pdam_pelanggan")
+    Call<PelangganReg> uploadImg (@Part MultipartBody.Part image,
+                                  @PartMap Map<String, RequestBody> text);
 
     @GET("Pdam_tarif")
     Call<TarifData> getTarifData();

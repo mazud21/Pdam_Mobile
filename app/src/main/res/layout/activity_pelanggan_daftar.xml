@@ -130,6 +130,7 @@
                         android:textColor="@color/colorHint" />
                 </android.support.design.widget.TextInputLayout>
 
+            <!--
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,11 +147,21 @@
                     android:backgroundTint="@color/colorAccent"
                     />
             </android.support.design.widget.TextInputLayout>
+            -->
 
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
+                android:text="Foto KTP"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                />
+
+            <ImageView
+                android:id="@+id/imgKtp"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:src="@drawable/ic_white_black_48dp"
                 />
 
             <android.support.design.widget.TextInputLayout

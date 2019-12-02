@@ -11,6 +11,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "BASE_URL", '"https://sholattime.000webhostapp.com/api_controller/"')
+        buildConfigField("String", "BASE_URL_IMAGE", '"https://sholattime.000webhostapp.com/images/"')
     }
     buildTypes {
         release {
@@ -39,4 +40,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.1.0'
 
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
+    implementation 'com.karumi:dexter:5.0.0'
 }
