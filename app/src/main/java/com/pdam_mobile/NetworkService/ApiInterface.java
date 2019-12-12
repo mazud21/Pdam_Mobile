@@ -1,6 +1,7 @@
 package com.pdam_mobile.NetworkService;
 
 import com.pdam_mobile.Model.CrudMasalahData;
+import com.pdam_mobile.Model.LoginPelangganData;
 import com.pdam_mobile.Model.MasalahData;
 import com.pdam_mobile.Model.PelangganData;
 import com.pdam_mobile.Model.PelangganReg;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -22,6 +24,11 @@ import retrofit2.http.PartMap;
 public interface ApiInterface {
     @GET("Pdam_masalah")
     Call<MasalahData> masalahData();
+
+    @FormUrlEncoded
+    @POST("Pdam_pelangganLogin")
+    Call<ResponseBody> loginPelangganData(@Field("no_pelanggan") String no_pelanggan,
+                                          @Field("password") String password);
 
     @FormUrlEncoded
     @POST("Pdam_masalah")

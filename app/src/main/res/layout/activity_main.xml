@@ -14,6 +14,13 @@
         android:text="ADD"
         />
 
+    <TextView
+        android:id="@+id/txtNama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMasalah"
         android:layout_width="match_parent"

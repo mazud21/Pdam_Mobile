@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.pdam_mobile.Adapter.MasalahAdapter;
 import com.pdam_mobile.Model.MasalahModel;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnAdd;
 
+    TextView tNama;
+    String resultNama;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        tNama = findViewById(R.id.txtNama);
         mainActivity = this;
 
         refresh();
@@ -52,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null)
+            resultNama = extras.getString("result_nama");
+        tNama.setText(resultNama);
     }
 
     public void refresh() {

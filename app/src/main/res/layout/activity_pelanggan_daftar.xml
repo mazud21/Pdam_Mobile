@@ -159,8 +159,8 @@
 
             <ImageView
                 android:id="@+id/imgKtp"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
                 android:src="@drawable/ic_white_black_48dp"
                 />
 

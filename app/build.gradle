@@ -10,6 +10,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        //buildConfigField("String", "BASE_URL", '"http://127.0.0.1/pdam/api_controller/"')
+        //buildConfigField("String", "BASE_URL", '"http://192.168.1.5/pdam/api_controller/"')
+        //buildConfigField("String", "BASE_URL", '"http://localhost/pdam/api_controller/"')
         buildConfigField("String", "BASE_URL", '"https://sholattime.000webhostapp.com/api_controller/"')
         buildConfigField("String", "BASE_URL_IMAGE", '"https://sholattime.000webhostapp.com/images/"')
     }
