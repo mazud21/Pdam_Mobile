@@ -1,39 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#3F51B5"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnAdd"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ADD"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/txtNama"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        />
+        <TextView
+            android:id="@+id/txtNama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            />
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Logout"
-        />
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Logout"
+            />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvMasalah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/lldetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-    </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:elevation="8dp"
+                android:fadingEdgeLength="8dp">
 
-</LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="8dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_launcher_background"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/img1"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="46dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="32dp"
+                        android:layout_toEndOf="@id/img1"
+                        android:gravity="center_horizontal"
+                        android:text="Info Tagihan Air"
+                        android:textSize="32sp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llpengaduan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:elevation="8dp"
+                android:fadingEdgeLength="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="8dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_launcher_background"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/img2"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="46dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="32dp"
+                        android:layout_toEndOf="@id/img2"
+                        android:gravity="center_horizontal"
+                        android:text=" Pengaduan"
+                        android:textSize="32sp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:elevation="8dp"
+                android:fadingEdgeLength="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="8dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/img3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_launcher_background"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/img3"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="46dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="32dp"
+                        android:layout_toEndOf="@id/img3"
+                        android:gravity="center_horizontal"
+                        android:text="Info Masalah Air"
+                        android:textSize="28sp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

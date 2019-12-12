@@ -96,14 +96,14 @@ public class PelangganLogin extends AppCompatActivity {
 
                             Toast.makeText(context, "Login Berhasil", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(context, MainActivity.class);
+                            Intent intent = new Intent(context, InfoMasalah.class);
                             String nama = jsonObject.getJSONObject("data").getString("nama");
 
                             prefManager.saveSPString(SharedPrefManager.SP_NAMA, nama);
 
                             prefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
 
-                            startActivity(new Intent(context, MainActivity.class)
+                            startActivity(new Intent(context, InfoMasalah.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
                             //intent.putExtra("result_nama", nama);

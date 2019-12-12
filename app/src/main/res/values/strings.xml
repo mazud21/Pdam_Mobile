@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Pdam_Mobile</string>
     <string name="title_activity_maps">Map</string>
+    <!-- LOREM IPSUM -->
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sem sem, pellentesque id leo eu, mattis pharetra ligula. Suspendisse rhoncus ante velit, sit amet sagittis lacus pulvinar dapibus. Praesent sit amet fringilla ligula. Ut at nunc sed ligula fermentum interdum. In eleifend tortor ut aliquam pretium. Suspendisse nulla enim, lacinia in malesuada et, egestas et dui. Donec blandit tincidunt auctor. Nullam iaculis auctor justo, et aliquam massa imperdiet id. Nulla sollicitudin elit at odio tempor, et elementum metus fringilla. Ut ex diam, convallis pellentesque dictum rutrum, placerat nec justo. Sed sit amet urna metus.
+    </string>
 </resources>

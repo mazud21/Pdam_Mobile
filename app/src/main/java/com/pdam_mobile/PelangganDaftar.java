@@ -177,7 +177,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
 
                         if (response.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Pendaftaran Telah Terkirim", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(PelangganDaftar.this, MainActivity.class));
+                            startActivity(new Intent(PelangganDaftar.this, InfoMasalah.class));
                         }
                     }
 
