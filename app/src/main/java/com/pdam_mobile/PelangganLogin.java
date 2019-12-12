@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pdam_mobile.Local.SharedPrefManager;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 
@@ -33,6 +34,8 @@ public class PelangganLogin extends AppCompatActivity {
 
     ApiInterface apiInterface;
 
+    SharedPrefManager prefManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,13 @@ public class PelangganLogin extends AppCompatActivity {
         pd.setMessage("Loading...");
         context = this;
 
+        prefManager = new SharedPrefManager(this);
+
+        if (prefManager.getSPSudahLogin()) {
+            startActivity(new Intent(PelangganLogin.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
 
         //method login
         btnLog.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +98,16 @@ public class PelangganLogin extends AppCompatActivity {
 
                             Intent intent = new Intent(context, MainActivity.class);
                             String nama = jsonObject.getJSONObject("data").getString("nama");
-                            intent.putExtra("result_nama", nama);
-                            startActivity(intent);
+
+                            prefManager.saveSPString(SharedPrefManager.SP_NAMA, nama);
+
+                            prefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
+
+                            startActivity(new Intent(context, MainActivity.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            finish();
+                            //intent.putExtra("result_nama", nama);
+                            //startActivity(intent);
                         } else if (jsonObject.getString("status").equals("false")){
                             Toast.makeText(context, "Login Gagal", Toast.LENGTH_SHORT).show();
                         }

@@ -2,7 +2,7 @@ package com.pdam_mobile.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PelangganReg {
+public class PelangganDaftarModel {
     @SerializedName("status")
     String status;
     @SerializedName("data")

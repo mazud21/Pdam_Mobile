@@ -1,4 +1,4 @@
-package com.pdam_mobile.Model;
+package com.pdam_mobile.ModelData;
 
 public class LoginPelangganData {
 

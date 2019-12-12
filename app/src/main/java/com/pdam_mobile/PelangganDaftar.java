@@ -5,11 +5,9 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -22,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,8 +39,8 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.pdam_mobile.Model.PelangganReg;
-import com.pdam_mobile.Model.TarifData;
+import com.pdam_mobile.Model.PelangganDaftarModel;
+import com.pdam_mobile.ModelData.TarifData;
 import com.pdam_mobile.Model.TarifModel;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
@@ -141,16 +138,16 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(),reqBody);
 
                 apiInterface = ApiClient.getApiInterface();
-                Call<PelangganReg> pelangganRegCall = apiInterface.uploadImg(partImage, map);
-                pelangganRegCall.enqueue(new Callback<PelangganReg>() {
+                Call<PelangganDaftarModel> pelangganRegCall = apiInterface.uploadImg(partImage, map);
+                pelangganRegCall.enqueue(new Callback<PelangganDaftarModel>() {
                     @Override
-                    public void onResponse(Call<PelangganReg> call, Response<PelangganReg> response) {
+                    public void onResponse(Call<PelangganDaftarModel> call, Response<PelangganDaftarModel> response) {
                         pd.dismiss();
                         Toast.makeText(PelangganDaftar.this, "Data pendaftaran terkirim", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onFailure(Call<PelangganReg> call, Throwable t) {
+                    public void onFailure(Call<PelangganDaftarModel> call, Throwable t) {
                         Toast.makeText(PelangganDaftar.this, "Data pendaftaran gagal terkirim", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -162,7 +159,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<PelangganReg> pelangganRegCall =
+                Call<PelangganDaftarModel> pelangganRegCall =
                         apiInterface.pelangganReg(
                                 etNoKtp.getText().toString(),
                                 etNama.getText().toString(),
@@ -173,9 +170,9 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                                 etTarif.getSelectedItem().toString()
                                 );
 
-                pelangganRegCall.enqueue(new Callback<PelangganReg>() {
+                pelangganRegCall.enqueue(new Callback<PelangganDaftarModel>() {
                     @Override
-                    public void onResponse(Call<PelangganReg> call, Response<PelangganReg> response) {
+                    public void onResponse(Call<PelangganDaftarModel> call, Response<PelangganDaftarModel> response) {
                         Call<PelangganData> pelangganDataCall = apiInterface.pelangganData();
 
                         if (response.isSuccessful()){
@@ -185,7 +182,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                     }
 
                     @Override
-                    public void onFailure(Call<PelangganReg> call, Throwable t) {
+                    public void onFailure(Call<PelangganDaftarModel> call, Throwable t) {
                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
 
                     }

@@ -1,11 +1,10 @@
 package com.pdam_mobile.NetworkService;
 
-import com.pdam_mobile.Model.CrudMasalahData;
-import com.pdam_mobile.Model.LoginPelangganData;
-import com.pdam_mobile.Model.MasalahData;
-import com.pdam_mobile.Model.PelangganData;
-import com.pdam_mobile.Model.PelangganReg;
-import com.pdam_mobile.Model.TarifData;
+import com.pdam_mobile.ModelData.CrudMasalahData;
+import com.pdam_mobile.ModelData.MasalahData;
+import com.pdam_mobile.ModelData.PelangganData;
+import com.pdam_mobile.Model.PelangganDaftarModel;
+import com.pdam_mobile.ModelData.TarifData;
 
 import java.util.Map;
 
@@ -47,7 +46,7 @@ public interface ApiInterface {
     /*
     @FormUrlEncoded
     @POST("Pdam_pelanggan")
-    Call<PelangganReg> pelangganReg(@Field("no_ktp") String no_ktp,
+    Call<PelangganDaftarModel> pelangganReg(@Field("no_ktp") String no_ktp,
                                     @Field("nama") String nama,
                                     @Field("alamat") String alamat,
                                     @Field("email") String email,
@@ -60,8 +59,8 @@ public interface ApiInterface {
 
     @Multipart
     @POST("Pdam_pelanggan")
-    Call<PelangganReg> uploadImg (@Part MultipartBody.Part image,
-                                  @PartMap Map<String, RequestBody> text);
+    Call<PelangganDaftarModel> uploadImg (@Part MultipartBody.Part image,
+                                          @PartMap Map<String, RequestBody> text);
 
     @GET("Pdam_tarif")
     Call<TarifData> getTarifData();
