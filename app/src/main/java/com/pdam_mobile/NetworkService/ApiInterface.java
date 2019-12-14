@@ -4,6 +4,7 @@ import com.pdam_mobile.ModelData.CrudMasalahData;
 import com.pdam_mobile.ModelData.MasalahData;
 import com.pdam_mobile.ModelData.PelangganData;
 import com.pdam_mobile.Model.PelangganDaftarModel;
+import com.pdam_mobile.ModelData.TagihanData;
 import com.pdam_mobile.ModelData.TarifData;
 
 import java.util.Map;
@@ -42,6 +43,9 @@ public interface ApiInterface {
 
     @GET("Pdam_pelanggan")
     Call<PelangganData> pelangganData();
+
+    @GET("Pdam_tagihan")
+    Call<TagihanData> tagihanData();
 
     /*
     @FormUrlEncoded

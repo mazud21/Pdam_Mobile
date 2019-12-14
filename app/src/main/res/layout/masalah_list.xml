@@ -27,7 +27,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/txtWilayah"
+                android:id="@+id/txtNama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Wilayah"
@@ -52,7 +52,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/txtHari"
+                android:id="@+id/txtAlamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hari"
@@ -76,7 +76,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/txtTanggal"
+                android:id="@+id/txtNoHp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tanggal"
@@ -100,7 +100,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/txtEstimasi"
+                android:id="@+id/txtBulanBayar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Estimasi"

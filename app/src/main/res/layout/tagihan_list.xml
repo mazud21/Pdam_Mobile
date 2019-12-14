@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#3F51B5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:background="@color/colorAccent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Pelanggan"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                />
+
+            <TextView
+                android:id="@+id/txtNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Pelanggan"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat Pelanggan"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/txtAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alamat Pelanggan"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nomor Telpon Pelanggan"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/txtNoHp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor Telpon Pelanggan"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bulan Tagihan"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/txtBulanBayar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bulan Tagihan"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Std. Awal"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/stdAwal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Std. Awal"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Std. Akhir"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/stdAkhir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Std. Akhir"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Biaya Air"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/biayaAir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Biaya Air"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Denda"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/txtDenda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Denda"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Biaya Segel"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/biayaSegel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Biaya Segel"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Angsuran Air"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/angsAir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Angsuran Air"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Angsuran Non Air"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/angsNon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Angsuran Non Air"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Tagihan"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/totTagihan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Tagihan"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="textEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status Bayar"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/statusBayar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status Bayar"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Pembayaran"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/tglBayar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Pembayaran"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

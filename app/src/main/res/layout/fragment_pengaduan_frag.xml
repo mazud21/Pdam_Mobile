@@ -54,7 +54,7 @@
                 />
 
             <TextView
-                android:id="@+id/txtWilayah"
+                android:id="@+id/txtNama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nama Pelanggan"
@@ -81,7 +81,7 @@
                 android:layout_margin="8dp"/>
 
             <TextView
-                android:id="@+id/txtHari"
+                android:id="@+id/txtAlamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Alamat Pelanggan"

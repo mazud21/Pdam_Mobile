@@ -51,10 +51,10 @@ public class MasalahAdapter extends RecyclerView.Adapter<MasalahAdapter.ViewHold
         ViewHolder( View itemView) {
             super(itemView);
             //mTxtNoInfo = (TextView) itemView.findViewById(R.id.txtNoInfo);
-            mTxtWilayah = (TextView) itemView.findViewById(R.id.txtWilayah);
-            mTxtHari = (TextView) itemView.findViewById(R.id.txtHari);
-            mTxtTanggal = (TextView) itemView.findViewById(R.id.txtTanggal);
-            mTxtEstimasi = (TextView) itemView.findViewById(R.id.txtEstimasi);
+            mTxtWilayah = (TextView) itemView.findViewById(R.id.txtNama);
+            mTxtHari = (TextView) itemView.findViewById(R.id.txtAlamat);
+            mTxtTanggal = (TextView) itemView.findViewById(R.id.txtNoHp);
+            mTxtEstimasi = (TextView) itemView.findViewById(R.id.txtBulanBayar);
             mTxtKerusakan = (TextView) itemView.findViewById(R.id.txtKerusakan);
             mTxtAlternatif = (TextView) itemView.findViewById(R.id.txtAlternatif);
             mTxtPenanganan = (TextView) itemView.findViewById(R.id.txtPenanganan);
