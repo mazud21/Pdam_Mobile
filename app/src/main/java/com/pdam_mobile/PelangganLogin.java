@@ -103,7 +103,7 @@ public class PelangganLogin extends AppCompatActivity {
 
                             prefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
 
-                            startActivity(new Intent(context, InfoMasalah.class)
+                            startActivity(new Intent(context, MainActivity.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
                             //intent.putExtra("result_nama", nama);
