@@ -1,6 +1,7 @@
-package com.pdam_mobile.Model;
+package com.pdam_mobile.ModelPost;
 
 import com.google.gson.annotations.SerializedName;
+import com.pdam_mobile.Model.PengaduanModel;
 
 public class PengaduanModelPost {
     @SerializedName("status")

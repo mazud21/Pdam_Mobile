@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPrefManager {
-    public static final String SP_MAHASISWA_APP = "spMahasiswaApp";
+    public static final String SP_PDAM_APP = "spPdamApp";
 
     public static final String SP_NAMA = "spNama";
+    public static final String SP_NO_PELANGGAN = "spNoPelanggan";
     public static final String SP_EMAIL = "spEmail";
+    public static final String SP_ALAMAT = "spAlamat";
 
     public static final String SP_SUDAH_LOGIN = "spSudahLogin";
 
@@ -15,7 +17,7 @@ public class SharedPrefManager {
     SharedPreferences.Editor spEditor;
 
     public SharedPrefManager(Context context){
-        sp = context.getSharedPreferences(SP_MAHASISWA_APP, Context.MODE_PRIVATE);
+        sp = context.getSharedPreferences(SP_PDAM_APP, Context.MODE_PRIVATE);
         spEditor = sp.edit();
     }
 
@@ -24,7 +26,7 @@ public class SharedPrefManager {
         spEditor.commit();
     }
 
-    public void saveSPInt(String keySP, int value){
+    public void saveSPInt(String keySP, Integer value){
         spEditor.putInt(keySP, value);
         spEditor.commit();
     }
@@ -38,8 +40,26 @@ public class SharedPrefManager {
         return sp.getString(SP_NAMA, "");
     }
 
+
+    public String getSpNoPelanggan() {
+        return sp.getString(SP_NO_PELANGGAN, "");
+    }
+
+
+
+    /*
+    public Integer getSpNoPelanggan() {
+        return sp.getInt(SP_NO_PELANGGAN, 0);
+    }
+
+     */
+
     public String getSPEmail(){
         return sp.getString(SP_EMAIL, "");
+    }
+
+    public String getSpAlamat(){
+        return sp.getString(SP_ALAMAT, "");
     }
 
     public Boolean getSPSudahLogin(){

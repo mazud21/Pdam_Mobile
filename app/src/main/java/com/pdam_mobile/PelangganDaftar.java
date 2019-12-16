@@ -39,7 +39,7 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.pdam_mobile.Model.PelangganDaftarModel;
+import com.pdam_mobile.ModelPost.PelangganDaftarModel;
 import com.pdam_mobile.ModelData.TarifData;
 import com.pdam_mobile.Model.TarifModel;
 import com.pdam_mobile.NetworkService.ApiClient;
