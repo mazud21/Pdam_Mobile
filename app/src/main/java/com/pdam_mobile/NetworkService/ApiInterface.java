@@ -1,5 +1,6 @@
 package com.pdam_mobile.NetworkService;
 
+import com.pdam_mobile.Model.PengaduanModelPost;
 import com.pdam_mobile.ModelData.CrudMasalahData;
 import com.pdam_mobile.ModelData.MasalahData;
 import com.pdam_mobile.ModelData.PelangganData;
@@ -50,6 +51,11 @@ public interface ApiInterface {
 
     @GET("Pdam_aduan")
     Call<PengaduanData> pengaduanData();
+
+    @FormUrlEncoded
+    @POST("Pdam_aduan")
+    Call<PengaduanModelPost> postPengaduan(@Field("no_pelanggan") String no_pelanggan,
+                                           @Field("keluhan") String keluhan);
 
     /*
     @FormUrlEncoded

@@ -96,6 +96,32 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nomor HP Pelanggan"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/txtNoHp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor HP Pelanggan"
+                android:textColor="@color/colorGrey"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -108,11 +134,11 @@
                 android:layout_marginBottom="8dp"
                 android:layout_margin="8dp"/>
 
-            <android.inputmethodservice.ExtractEditText
+            <EditText
                 android:id="@+id/isiKeluhan"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:hint="Masukkan Keluhan..."/>
+                android:text="Masukkan Keluhan..."/>
 
         </LinearLayout>
 
