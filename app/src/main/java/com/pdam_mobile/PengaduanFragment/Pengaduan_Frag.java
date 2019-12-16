@@ -32,6 +32,7 @@ public class Pengaduan_Frag extends Fragment {
     TextView tNoPel;
     EditText eIsiKeluhan;
     Button btnKeluhan;
+
     Context context;
     ProgressDialog pd;
 
@@ -49,21 +50,20 @@ public class Pengaduan_Frag extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pengaduan_frag, container, false);
 
+        context = view.getContext();
+        prefManager = new SharedPrefManager(context);
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
         tNoPel = view.findViewById(R.id.noPell);
-        tNoPel.setText("12");
+        tNoPel.setText(prefManager.getSpNoPelanggan());
 
         eIsiKeluhan = view.findViewById(R.id.isiKeluhan);
 
         btnKeluhan = view.findViewById(R.id.btnKeluhan);
 
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
         pd = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
-
         pd.setMessage("Loading...");
-        context = view.getContext();
-
-        prefManager = new SharedPrefManager(context);
-
 
         //method login
         btnKeluhan.setOnClickListener(new View.OnClickListener() {
