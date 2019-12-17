@@ -6,7 +6,6 @@ import com.pdam_mobile.ModelData.MasalahData;
 import com.pdam_mobile.ModelData.PelangganData;
 import com.pdam_mobile.ModelPost.PelangganDaftarModel;
 import com.pdam_mobile.ModelData.PengaduanData;
-import com.pdam_mobile.ModelData.TagihanData;
 import com.pdam_mobile.ModelData.TarifData;
 
 import java.util.Map;
@@ -18,7 +17,6 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -38,13 +36,10 @@ public interface ApiInterface {
     Call<PelangganData> pelangganData();
 
     @GET("Pdam_tagihan")
-    Call<TagihanData> tagihanData();
-
-    @GET("Pdam_tagihan")
     Call<TagihanDataId> tagihanDataId(@Query("no_pelanggan") String no_pelanggan);
 
     @GET("Pdam_aduan")
-    Call<PengaduanData> pengaduanData();
+    Call<PengaduanData> pengaduanDataId(@Query("no_pelanggan") String no_pelanggan);
 
     @FormUrlEncoded
     @POST("Pdam_aduan")

@@ -1,10 +1,10 @@
 package com.pdam_mobile.PengaduanFragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,14 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.pdam_mobile.Adapter.MasalahAdapter;
 import com.pdam_mobile.Adapter.PengaduanAdapter;
-import com.pdam_mobile.InfoMasalah;
 import com.pdam_mobile.Local.SharedPrefManager;
-import com.pdam_mobile.Model.MasalahModel;
 import com.pdam_mobile.Model.PengaduanModel;
-import com.pdam_mobile.ModelData.MasalahData;
 import com.pdam_mobile.ModelData.PengaduanData;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
@@ -48,14 +45,14 @@ public class Monitor_Frag extends Fragment {
     TextView tNama;
 
     SharedPrefManager prefManager;
+    String sNoPel;
     Context context;
 
-
+    ProgressDialog pd;
 
     public Monitor_Frag() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,8 +67,15 @@ public class Monitor_Frag extends Fragment {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         prefManager = new SharedPrefManager(view.getContext());
+        context = view.getContext();
 
         mainActivity = this;
+
+        sNoPel = prefManager.getSpNoPelanggan();
+
+        pd = new ProgressDialog(context, R.style.MyAlertDialogStyle);
+        pd.setMessage("Loading...");
+        pd.show();
 
         refresh();
 
@@ -79,14 +83,21 @@ public class Monitor_Frag extends Fragment {
     }
 
     private void refresh() {
-        Call<PengaduanData> pengaduanModelCall = apiInterface.pengaduanData();
+        Call<PengaduanData> pengaduanModelCall =
+                apiInterface.pengaduanDataId(sNoPel);
 
         pengaduanModelCall.enqueue(new Callback<PengaduanData>() {
             @Override
             public void onResponse(Call<PengaduanData> call, Response<PengaduanData> response) {
-                List<PengaduanModel> pengaduanDataList = response.body().getPengaduanDataList();
-                adapter = new PengaduanAdapter(pengaduanDataList);
-                recyclerView.setAdapter(adapter);
+                if (response.isSuccessful()) {
+                    pd.dismiss();
+
+                    List<PengaduanModel> pengaduanDataList = response.body().getPengaduanDataList();
+                    adapter = new PengaduanAdapter(pengaduanDataList);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
