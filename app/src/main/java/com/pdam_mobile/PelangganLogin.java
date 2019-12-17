@@ -92,14 +92,24 @@ public class PelangganLogin extends AppCompatActivity {
                     pd.dismiss();
                     try {
                         JSONObject jsonObject = new JSONObject(response.body().string());
+
                         if (jsonObject.getString("status").equals("true")) {
 
                             Toast.makeText(context, "Login Berhasil", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(context, InfoMasalah.class);
-                            String nama = jsonObject.getJSONObject("data").getString("nama");
+                            Intent intent = new Intent(context, MainActivity.class);
 
+                            //Integer no_pelanggan = jsonObject.getJSONObject("data").getInt("no_pelanggan");
+                            String no_pelanggan = etNoPel.getText().toString();
+                            String nama = jsonObject.getJSONObject("data").getString("nama");
+                            String alamat = jsonObject.getJSONObject("data").getString("alamat");
+                            String email = jsonObject.getJSONObject("data").getString("email");
+
+                            //prefManager.saveSPInt(SharedPrefManager.SP_NO_PELANGGAN, no_pelanggan);
+                            prefManager.saveSPString(SharedPrefManager.SP_NO_PELANGGAN, no_pelanggan);
                             prefManager.saveSPString(SharedPrefManager.SP_NAMA, nama);
+                            prefManager.saveSPString(SharedPrefManager.SP_ALAMAT, alamat);
+                            prefManager.saveSPString(SharedPrefManager.SP_EMAIL, email);
 
                             prefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
 

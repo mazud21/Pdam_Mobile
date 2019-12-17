@@ -1,5 +1,6 @@
 package com.pdam_mobile;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pdam_mobile.Adapter.MasalahAdapter;
 import com.pdam_mobile.Adapter.TagihanAdapter;
@@ -16,6 +18,7 @@ import com.pdam_mobile.Model.MasalahModel;
 import com.pdam_mobile.Model.TagihanModel;
 import com.pdam_mobile.ModelData.MasalahData;
 import com.pdam_mobile.ModelData.TagihanData;
+import com.pdam_mobile.ModelData.TagihanDataId;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 
@@ -34,7 +37,10 @@ public class DetailTagihan extends AppCompatActivity {
     public static DetailTagihan detailTagihan;
 
     SharedPrefManager prefManager;
+    String sNoPel;
     Context context;
+
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,41 +57,37 @@ public class DetailTagihan extends AppCompatActivity {
         detailTagihan = this;
         context = this;
 
+        sNoPel = prefManager.getSpNoPelanggan();
+        pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
+        pd.setMessage("Loading...");
+        pd.show();
         refresh();
 
     }
 
     public void refresh() {
-        Call<TagihanData> tagihanModelCall = apiInterface.tagihanData();
+        Call<TagihanDataId> tagihanModelCall =
+                apiInterface.tagihanDataId(sNoPel);
 
-        tagihanModelCall.enqueue(new Callback<TagihanData>() {
+        tagihanModelCall.enqueue(new Callback<TagihanDataId>() {
             @Override
-            public void onResponse(Call<TagihanData> call, Response<TagihanData> response) {
-                List<TagihanModel> tagihanModelList = response.body().getTagihanDataList();
-                adapter = new TagihanAdapter(tagihanModelList);
-                recyclerView.setAdapter(adapter);
+            public void onResponse(Call<TagihanDataId> call, Response<TagihanDataId> response) {
+                if (response.isSuccessful()) {
+                    pd.dismiss();
+
+                    List<TagihanModel> tagihanModelList = response.body().getTagihanDataList();
+                    adapter = new TagihanAdapter(tagihanModelList);
+                    recyclerView.setAdapter(adapter);
+
+                } else {
+                    Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<TagihanData> call, Throwable t) {
+            public void onFailure(Call<TagihanDataId> call, Throwable t) {
                 Log.e("Retrofit Get", t.toString());
             }
         });
-
-                /*
-            @Override
-            public void onResponse(Call<MasalahData> call, Response<MasalahData> response) {
-                List<MasalahModel> masalahDataList = response.body().getMasalahDataList();
-                adapter = new MasalahAdapter(masalahDataList);
-                recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<MasalahData> call, Throwable t) {
-                Log.e("Retrofit Get", t.toString());
-            }
-        });
-
- */
     }
 }

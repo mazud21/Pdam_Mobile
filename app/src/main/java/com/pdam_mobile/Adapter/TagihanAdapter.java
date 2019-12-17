@@ -31,7 +31,7 @@ public class TagihanAdapter extends RecyclerView.Adapter<TagihanAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NotNull TagihanAdapter.ViewHolder viewHolder, int i) {
-        //viewHolder.mTxtNoInfo.setText(tagihanDataList.get(i).getNo_info());
+        viewHolder.mTxtNoPel.setText(tagihanDataList.get(i).getNo_pelanggan());
         viewHolder.mTxtNama.setText(tagihanDataList.get(i).getNama());
         viewHolder.mTxtAlamat.setText(tagihanDataList.get(i).getAlamat());
         viewHolder.mTxtNoHp.setText(tagihanDataList.get(i).getNo_hp());
@@ -54,14 +54,14 @@ public class TagihanAdapter extends RecyclerView.Adapter<TagihanAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mTxtNoInfo, mTxtNama, mTxtAlamat, mTxtNoHp, mTxtBulanBayar,
+        TextView mTxtNoPel, mTxtNama, mTxtAlamat, mTxtNoHp, mTxtBulanBayar,
                  mTxtStdAwal, mTxtStdAkhir, mTxtBiayaAir, mTxtDenda,
                  mTxtBiayaSegel, mTxtAngsAir, mTxtAngsNon, mTxtTotTag,
                  mTxtStatus, mTxtTglBayar;
 
         ViewHolder( View itemView) {
             super(itemView);
-            //mTxtNoInfo = itemView.findViewById(R.id.txtNoInfo);
+            mTxtNoPel = itemView.findViewById(R.id.txtNoPel);
             mTxtNama = itemView.findViewById(R.id.txtNama);
             mTxtAlamat = itemView.findViewById(R.id.txtAlamat);
             mTxtNoHp = itemView.findViewById(R.id.txtNoHp);

@@ -7,6 +7,8 @@ public class TagihanModel {
     @SerializedName("no_info")
     private String no_info;
     */
+    @SerializedName("no_pelanggan")
+    private String no_pelanggan;
     @SerializedName("nama")
     private String nama;
     @SerializedName("alamat")
@@ -35,6 +37,14 @@ public class TagihanModel {
     private String status_bayar;
     @SerializedName("tgl_bayar")
     private String tgl_bayar;
+
+    public String getNo_pelanggan() {
+        return no_pelanggan;
+    }
+
+    public void setNo_pelanggan(String no_pelanggan) {
+        this.no_pelanggan = no_pelanggan;
+    }
 
     public String getNama() {
         return nama;
@@ -148,7 +158,8 @@ public class TagihanModel {
         this.tgl_bayar = tgl_bayar;
     }
 
-    public TagihanModel(String nama, String alamat, String no_hp, String bulan_bayar, String std_awal, String std_akhir, String biaya_air, String denda, String biaya_segel, String angs_air, String angs_non_air, String total_tagihan, String status_bayar, String tgl_bayar) {
+    public TagihanModel(String no_pelanggan, String nama, String alamat, String no_hp, String bulan_bayar, String std_awal, String std_akhir, String biaya_air, String denda, String biaya_segel, String angs_air, String angs_non_air, String total_tagihan, String status_bayar, String tgl_bayar) {
+        this.no_pelanggan = no_pelanggan;
         this.nama = nama;
         this.alamat = alamat;
         this.no_hp = no_hp;

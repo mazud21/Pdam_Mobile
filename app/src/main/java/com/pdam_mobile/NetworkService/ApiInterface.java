@@ -1,5 +1,6 @@
 package com.pdam_mobile.NetworkService;
 
+import com.pdam_mobile.ModelData.TagihanDataId;
 import com.pdam_mobile.ModelPost.PengaduanModelPost;
 import com.pdam_mobile.ModelData.MasalahData;
 import com.pdam_mobile.ModelData.PelangganData;
@@ -17,10 +18,12 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET("Pdam_masalah")
@@ -36,6 +39,9 @@ public interface ApiInterface {
 
     @GET("Pdam_tagihan")
     Call<TagihanData> tagihanData();
+
+    @GET("Pdam_tagihan")
+    Call<TagihanDataId> tagihanDataId(@Query("no_pelanggan") String no_pelanggan);
 
     @GET("Pdam_aduan")
     Call<PengaduanData> pengaduanData();
