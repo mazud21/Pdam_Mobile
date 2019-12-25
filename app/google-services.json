@@ -1,0 +1,211 @@
+{
+  "project_info": {
+    "project_number": "73471882469",
+    "firebase_url": "https://pdam-mobile.firebaseio.com",
+    "project_id": "pdam-mobile",
+    "storage_bucket": "pdam-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73471882469:android:d6581161cefd48abdb900c",
+        "android_client_info": {
+          "package_name": "com.fcmnotif"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73471882469-ku23joi5fobpp2ga8idoc885ilcnlcr6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fcmnotif",
+            "certificate_hash": "a9f52e16fbd45603d7aeffae59f7ded0e6274ba1"
+          }
+        },
+        {
+          "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLUUJLDREH0EKFujzztffZfvsIzcllhqU"
+        },
+        {
+          "current_key": "AIzaSyDIcQgeSbqJh-IYSSp4K20StVEYweY9oEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73471882469:android:efc04dc886998dbcdb900c",
+        "android_client_info": {
+          "package_name": "com.pdam_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73471882469-ihs0ggkaa1llcp30hk46sajtq6v19qca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pdam_mobile",
+            "certificate_hash": "a9f52e16fbd45603d7aeffae59f7ded0e6274ba1"
+          }
+        },
+        {
+          "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLUUJLDREH0EKFujzztffZfvsIzcllhqU"
+        },
+        {
+          "current_key": "AIzaSyDIcQgeSbqJh-IYSSp4K20StVEYweY9oEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73471882469:android:dcf3223a0c5aab98db900c",
+        "android_client_info": {
+          "package_name": "com.skyshi.notification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73471882469-011hnm58p6r8oev77hivlgoptcc9aoad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.skyshi.notification",
+            "certificate_hash": "a9f52e16fbd45603d7aeffae59f7ded0e6274ba1"
+          }
+        },
+        {
+          "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLUUJLDREH0EKFujzztffZfvsIzcllhqU"
+        },
+        {
+          "current_key": "AIzaSyDIcQgeSbqJh-IYSSp4K20StVEYweY9oEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73471882469:android:0d7d56ec074c3f99db900c",
+        "android_client_info": {
+          "package_name": "com.trypdam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73471882469-8bh5tg2obsagghlre96gbjv4svkqbrq8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trypdam",
+            "certificate_hash": "a9f52e16fbd45603d7aeffae59f7ded0e6274ba1"
+          }
+        },
+        {
+          "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLUUJLDREH0EKFujzztffZfvsIzcllhqU"
+        },
+        {
+          "current_key": "AIzaSyDIcQgeSbqJh-IYSSp4K20StVEYweY9oEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73471882469:android:a9e6fd178c5a6e79db900c",
+        "android_client_info": {
+          "package_name": "info.androidhive.firebasenotifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73471882469-iu6dajrrqmrqgcigbhr9e3j8l5s1bocl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.androidhive.firebasenotifications",
+            "certificate_hash": "a9f52e16fbd45603d7aeffae59f7ded0e6274ba1"
+          }
+        },
+        {
+          "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLUUJLDREH0EKFujzztffZfvsIzcllhqU"
+        },
+        {
+          "current_key": "AIzaSyDIcQgeSbqJh-IYSSp4K20StVEYweY9oEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73471882469-lv15j74b9lk0jv4vbe1ucp3joja96l6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

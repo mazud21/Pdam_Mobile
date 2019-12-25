@@ -13,6 +13,8 @@ public class SharedPrefManager {
 
     public static final String SP_SUDAH_LOGIN = "spSudahLogin";
 
+    public final static String FIREBASE_NOTIF_TOKEN = "firebase_notif_token";
+
     SharedPreferences sp;
     SharedPreferences.Editor spEditor;
 
@@ -40,12 +42,13 @@ public class SharedPrefManager {
         return sp.getString(SP_NAMA, "");
     }
 
-
     public String getSpNoPelanggan() {
         return sp.getString(SP_NO_PELANGGAN, "");
     }
 
-
+    public String getFirebaseNotifToken() {
+        return sp.getString(FIREBASE_NOTIF_TOKEN, "");
+    }
 
     /*
     public Integer getSpNoPelanggan() {

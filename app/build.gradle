@@ -13,7 +13,7 @@ android {
         //buildConfigField("String", "BASE_URL", '"http://127.0.0.1/pdam/api_controller/"')
         //buildConfigField("String", "BASE_URL", '"http://192.168.1.5/pdam/api_controller/"')
         //buildConfigField("String", "BASE_URL", '"http://localhost/pdam/api_controller/"')
-        buildConfigField("String", "BASE_URL", '"https://sholattime.000webhostapp.com/api_controller/"')
+        buildConfigField("String", "BASE_URL", '"http://www.hmazud.web.id/api_controller/"')
         buildConfigField("String", "BASE_URL_IMAGE", '"https://sholattime.000webhostapp.com/images/"')
     }
     buildTypes {
@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:28.0.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -47,4 +48,11 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    //implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    //implementation 'com.google.firebase:firebase-core:16.0.4'
+    //implementation 'com.google.firebase:firebase-messaging:20.1.0'
+
 }
+apply plugin: 'com.google.gms.google-services'
