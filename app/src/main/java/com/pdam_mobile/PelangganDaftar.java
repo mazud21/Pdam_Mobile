@@ -2,9 +2,11 @@ package com.pdam_mobile;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -39,6 +41,7 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.pdam_mobile.Local.SharedPrefManager;
 import com.pdam_mobile.ModelPost.PelangganDaftarModel;
 import com.pdam_mobile.ModelData.TarifData;
 import com.pdam_mobile.Model.TarifModel;
@@ -59,6 +62,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.pdam_mobile.Local.SharedPrefManager.FIREBASE_NOTIF_TOKEN;
+
 public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallback {
 
     EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp, etFotoKtp;
@@ -72,9 +77,11 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
     Spinner etTarif;
     Context context;
 
-    String part_image;
+    String part_image, regId;
     ProgressDialog pd;
     final int REQUEST_GALLERY = 9544;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +98,11 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         //etFotoKtp = (EditText) findViewById(R.id.etFotoKtp);
         //etTarif = (EditText) findViewById(R.id.etTarif);
         imgKtp = findViewById(R.id.imgKtp);
+
+        //get regId FCM from sharedpref
+        sharedPreferences = getSharedPreferences(SharedPrefManager.SP_PDAM_APP, Activity.MODE_PRIVATE);
+
+        regId = sharedPreferences.getString(FIREBASE_NOTIF_TOKEN, "");
 
         pd = new ProgressDialog(this);
         pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
@@ -132,6 +144,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 map.put("email", createPartFromString(etEmail.getText().toString()));
                 map.put("no_hp", createPartFromString(etNoHp.getText().toString()));
                 map.put("pilih_tarif", createPartFromString(etTarif.getSelectedItem().toString()));
+                map.put("regId", createPartFromString(regId));
 
                 File imagefile = new File(part_image);
                 RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"),imagefile);
