@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +28,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -54,6 +58,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -66,7 +71,7 @@ import static com.pdam_mobile.Local.SharedPrefManager.FIREBASE_NOTIF_TOKEN;
 
 public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallback {
 
-    EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp, etFotoKtp;
+    EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp;
     ImageView imgKtp;
     Button btnDaftar;
     ApiInterface apiInterface;
@@ -88,6 +93,10 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelanggan_daftar);
 
+        pd = new ProgressDialog(this);
+        pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
+        pd.setMessage("loading ... ");
+
         requestMultiplePermissions();
 
         etNoKtp = findViewById(R.id.etNoKtp);
@@ -95,20 +104,14 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         etAlamat = findViewById(R.id.etAlamat);
         etEmail = findViewById(R.id.etEmail);
         etNoHp = findViewById(R.id.etNoHp);
-        //etFotoKtp = (EditText) findViewById(R.id.etFotoKtp);
-        //etTarif = (EditText) findViewById(R.id.etTarif);
         imgKtp = findViewById(R.id.imgKtp);
 
         //get regId FCM from sharedpref
         sharedPreferences = getSharedPreferences(SharedPrefManager.SP_PDAM_APP, Activity.MODE_PRIVATE);
-
         regId = sharedPreferences.getString(FIREBASE_NOTIF_TOKEN, "");
 
-        pd = new ProgressDialog(this);
-        pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
-        pd.setMessage("loading ... ");
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        // pendeklarasian untuk fragment google map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -118,25 +121,28 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         etTarif = (Spinner) findViewById(R.id.etTarif);
+
         context = this;
-        apiInterface = ApiClient.getApiInterface();
+
+        //call method initSpinnerTarif()
         initSpinnerTarif();
 
+        //mengarahkan ke file manager
         imgKtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"open gallery"),REQUEST_GALLERY);
+                startActivityForResult(Intent.createChooser(intent, "open gallery"), REQUEST_GALLERY);
             }
         });
 
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.show();
 
+                pd.show();
                 HashMap<String, RequestBody> map = new HashMap<String, RequestBody>();
                 map.put("no_ktp", createPartFromString(etNoKtp.getText().toString()));
                 map.put("nama", createPartFromString(etNama.getText().toString()));
@@ -147,8 +153,8 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 map.put("regId", createPartFromString(regId));
 
                 File imagefile = new File(part_image);
-                RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"),imagefile);
-                MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(),reqBody);
+                RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"), imagefile);
+                MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(), reqBody);
 
                 apiInterface = ApiClient.getApiInterface();
                 Call<PelangganDaftarModel> pelangganRegCall = apiInterface.uploadImg(partImage, map);
@@ -165,52 +171,14 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                     }
                 });
             }
+
         });
 
-        //start daftar tanpa image
-        /*
-        btnDaftar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Call<PelangganDaftarModel> pelangganRegCall =
-                        apiInterface.pelangganReg(
-                                etNoKtp.getText().toString(),
-                                etNama.getText().toString(),
-                                etAlamat.getText().toString(),
-                                etEmail.getText().toString(),
-                                etNoHp.getText().toString(),
-                                etFotoKtp.getText().toString(),
-                                etTarif.getSelectedItem().toString()
-                                );
-
-                pelangganRegCall.enqueue(new Callback<PelangganDaftarModel>() {
-                    @Override
-                    public void onResponse(Call<PelangganDaftarModel> call, Response<PelangganDaftarModel> response) {
-                        Call<PelangganData> pelangganDataCall = apiInterface.pelangganData();
-
-                        if (response.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Pendaftaran Telah Terkirim", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(PelangganDaftar.this, InfoMasalah.class));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<PelangganDaftarModel> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-
-                    }
-                });
-            }
-        });
-         */
-        //end daftar tanpa image
-
-        //get tarif spinner
+        //set on selected tarif spinner
         etTarif.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedName = adapterView.getItemAtPosition(i).toString();
-                //etTarif.getSelectedItem().toString();
                 ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
@@ -222,7 +190,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
     }
 
     //permission for allowing external storage
-    private void requestMultiplePermissions(){
+    private void requestMultiplePermissions() {
         Dexter.withActivity(this)
                 .withPermissions(
                         Manifest.permission.CAMERA,
@@ -258,26 +226,23 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 .check();
     }
 
+    //
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK)
-        {
-            if(requestCode == REQUEST_GALLERY)
-            {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_GALLERY) {
                 Uri dataimage = data.getData();
                 String[] imageprojection = {MediaStore.Images.Media.DATA};
-                Cursor cursor = getContentResolver().query(dataimage,imageprojection,null,null,null);
+                Cursor cursor = getContentResolver().query(dataimage, imageprojection, null, null, null);
 
-                if (cursor != null)
-                {
+                if (cursor != null) {
                     cursor.moveToFirst();
                     int indexImage = cursor.getColumnIndex(imageprojection[0]);
                     part_image = cursor.getString(indexImage);
 
-                    if(part_image != null)
-                    {
+                    if (part_image != null) {
                         File image = new File(part_image);
                         imgKtp.setImageBitmap(BitmapFactory.decodeFile(image.getAbsolutePath()));
                     }
@@ -291,6 +256,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         return RequestBody.create(okhttp3.MultipartBody.FORM, s);
     }
 
+    //get map from gmaps api
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -299,22 +265,43 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         LatLng bantul = new LatLng(-7.90233, 110.3255365);
         mMap.addMarker(new MarkerOptions().position(bantul).title("Bantul"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(bantul));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bantul, 11.0f));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onMapClick(LatLng latLng) {
+
+                mMap.clear();
+            }
+        });
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
                 try {
                     if (geo == null)
                         geo = new Geocoder(PelangganDaftar.this, Locale.getDefault());
-                    List<Address> address = geo.getFromLocation(latLng.latitude, latLng.longitude, 1);
+
+                    List<Address> address = geo.getFromLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            1);
+
                     if (address.size() > 0) {
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(
-                                address.get(0).getLatitude()
-                                +""+address.get(0).getLongitude()));
-                        etAlamat.setText("Lat:" + address.get(0).getLatitude()
-                                + ". Long:" + address.get(0).getLongitude());
+
+                        mMap.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .title(
+                                        address.get(0).getFeatureName()
+                                ));
+
+                        etAlamat.setText(
+                                "Alamat : " + address.get(0).getAddressLine(0)
+                                        + ". Latitude : " + address.get(0).getLatitude()
+                                        + ". Longitude : " + address.get(0).getLongitude());
                     }
+
                 } catch (IOException ex) {
                     Toast.makeText(PelangganDaftar.this, "Error:" + ex.getMessage().toString(), Toast.LENGTH_LONG).show();
                 }
@@ -326,12 +313,12 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                etAlamat.setText(marker.getTitle().toString() + " Lat:" + marker.getPosition().latitude + " Long:" + marker.getPosition().longitude);
                 return false;
             }
         });
     }
 
+    //get tarif from api
     private void initSpinnerTarif() {
         apiInterface.getTarifData().enqueue(new Callback<TarifData>() {
             @Override
