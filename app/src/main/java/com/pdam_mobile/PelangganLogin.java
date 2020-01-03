@@ -5,12 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Length;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.pdam_mobile.Local.SharedPrefManager;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
@@ -19,15 +28,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PelangganLogin extends AppCompatActivity {
+public class PelangganLogin extends AppCompatActivity implements Validator.ValidationListener {
 
-    EditText etNoPel, etPasPel;
+    @NotEmpty(message = "This field required")
+    @Length(min = 8, message = "This field must have at least 8")
+    private EditText etPasPel;
+
+    @NotEmpty(message = "This field required")
+    private EditText etNoPel;
+
+    CheckBox checkBox;
     Button btnLog, btnReg;
     Context context;
     ProgressDialog pd;
@@ -36,20 +53,28 @@ public class PelangganLogin extends AppCompatActivity {
 
     SharedPrefManager prefManager;
 
+    Validator validator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelanggan_login);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
+        pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
+        pd.setMessage("Loading...");
+        context = this;
 
         etNoPel = findViewById(R.id.noPelanggan);
         etPasPel = findViewById(R.id.passPelanggan);
         btnLog = findViewById(R.id.btnLogin);
         btnReg = findViewById(R.id.btnSignUp);
 
+        checkBox = (CheckBox) findViewById(R.id.checkbox);
+
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
-        pd.setMessage("Loading...");
-        context = this;
 
         prefManager = new SharedPrefManager(this);
 
@@ -59,13 +84,22 @@ public class PelangganLogin extends AppCompatActivity {
             finish();
         }
 
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    etPasPel.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    etPasPel.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+
         //method login
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //pd = ProgressDialog.show(context, null,"Loading...", true, false);
-                pd.show();
-                requestLogin();
+                validator.validate();
             }
         });
 
@@ -118,8 +152,9 @@ public class PelangganLogin extends AppCompatActivity {
                             finish();
                             //intent.putExtra("result_nama", nama);
                             //startActivity(intent);
-                        } else if (jsonObject.getString("status").equals("false")){
-                            Toast.makeText(context, "Login Gagal", Toast.LENGTH_SHORT).show();
+                        } if (jsonObject.getString("status").equals("false")) {
+                            pd.dismiss();
+                            Toast.makeText(context, "No Pelanggan atau Password salah", Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {
@@ -128,7 +163,8 @@ public class PelangganLogin extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                } else {
+                } else if (!response.isSuccessful()){
+                    Toast.makeText(PelangganLogin.this, "No Pelanggan atau Password salah", Toast.LENGTH_SHORT).show();
                     pd.dismiss();
                 }
             }
@@ -139,5 +175,25 @@ public class PelangganLogin extends AppCompatActivity {
                 pd.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onValidationSucceeded() {
+        requestLogin();
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
