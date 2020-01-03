@@ -174,6 +174,8 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PelangganDaftar.this, PelangganLogin.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -376,6 +378,9 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 public void onResponse(Call<PelangganDaftarModel> call, Response<PelangganDaftarModel> response) {
                     pd.dismiss();
                     Toast.makeText(PelangganDaftar.this, "Data pendaftaran terkirim", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(PelangganDaftar.this, PelangganLogin.class);
+                    startActivity(intent);
+                    finish();
                 }
 
                 @Override
