@@ -13,11 +13,9 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,8 +26,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.basgeekball.awesomevalidation.AwesomeValidation;
-import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -37,7 +33,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -45,10 +40,17 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Length;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
+import com.mobsandgeeks.saripaar.annotation.Pattern;
 import com.pdam_mobile.Local.SharedPrefManager;
-import com.pdam_mobile.ModelPost.PelangganDaftarModel;
-import com.pdam_mobile.ModelData.TarifData;
 import com.pdam_mobile.Model.TarifModel;
+import com.pdam_mobile.ModelData.TarifData;
+import com.pdam_mobile.ModelPost.PelangganDaftarModel;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 
@@ -58,7 +60,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -69,11 +70,28 @@ import retrofit2.Response;
 
 import static com.pdam_mobile.Local.SharedPrefManager.FIREBASE_NOTIF_TOKEN;
 
-public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallback {
+public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallback, Validator.ValidationListener {
 
-    EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp;
+    @NotEmpty(message = "This field required")
+    @Length(min = 16, max = 16, message = "This field must have at least 16")
+    private EditText etNoKtp;
+    @NotEmpty(message = "This field required")
+    @Length(min = 2, message = "This field must have at least 2")
+    private EditText etNama;
+    @NotEmpty(message = "This field required")
+    @Email
+    private EditText etEmail;
+    @NotEmpty(message = "This field required")
+    private EditText etAlamat;
+    @NotEmpty(message = "This field required")
+    @Pattern(regex = "^08[0-9]{10,}$", message = "Please enter valid Phone number")
+    private EditText etNoHp;
+    //@NotEmpty(message = "This field required")
+    //public EditText etImg;
+
+    //EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp;
     ImageView imgKtp;
-    Button btnDaftar;
+    Button btnDaftar, btnBatal;
     ApiInterface apiInterface;
 
     GoogleMap mMap;
@@ -88,10 +106,15 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
 
     SharedPreferences sharedPreferences;
 
+    Validator validator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelanggan_daftar);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         pd = new ProgressDialog(this);
         pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
@@ -105,6 +128,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         etEmail = findViewById(R.id.etEmail);
         etNoHp = findViewById(R.id.etNoHp);
         imgKtp = findViewById(R.id.imgKtp);
+        //etImg = findViewById(R.id.etImg);
 
         //get regId FCM from sharedpref
         sharedPreferences = getSharedPreferences(SharedPrefManager.SP_PDAM_APP, Activity.MODE_PRIVATE);
@@ -116,11 +140,12 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        btnDaftar = (Button) findViewById(R.id.btnDaftar);
+        btnDaftar = findViewById(R.id.btnDaftar);
+        btnBatal = findViewById(R.id.btnBatal);
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        etTarif = (Spinner) findViewById(R.id.etTarif);
+        etTarif = findViewById(R.id.etTarif);
 
         context = this;
 
@@ -141,37 +166,15 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                pd.show();
-                HashMap<String, RequestBody> map = new HashMap<String, RequestBody>();
-                map.put("no_ktp", createPartFromString(etNoKtp.getText().toString()));
-                map.put("nama", createPartFromString(etNama.getText().toString()));
-                map.put("alamat", createPartFromString(etAlamat.getText().toString()));
-                map.put("email", createPartFromString(etEmail.getText().toString()));
-                map.put("no_hp", createPartFromString(etNoHp.getText().toString()));
-                map.put("pilih_tarif", createPartFromString(etTarif.getSelectedItem().toString()));
-                map.put("regId", createPartFromString(regId));
-
-                File imagefile = new File(part_image);
-                RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"), imagefile);
-                MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(), reqBody);
-
-                apiInterface = ApiClient.getApiInterface();
-                Call<PelangganDaftarModel> pelangganRegCall = apiInterface.uploadImg(partImage, map);
-                pelangganRegCall.enqueue(new Callback<PelangganDaftarModel>() {
-                    @Override
-                    public void onResponse(Call<PelangganDaftarModel> call, Response<PelangganDaftarModel> response) {
-                        pd.dismiss();
-                        Toast.makeText(PelangganDaftar.this, "Data pendaftaran terkirim", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<PelangganDaftarModel> call, Throwable t) {
-                        Toast.makeText(PelangganDaftar.this, "Data pendaftaran gagal terkirim", Toast.LENGTH_LONG).show();
-                    }
-                });
+                validator.validate(true);
             }
+        });
 
+        btnBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PelangganDaftar.this, PelangganLogin.class);
+            }
         });
 
         //set on selected tarif spinner
@@ -245,6 +248,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                     if (part_image != null) {
                         File image = new File(part_image);
                         imgKtp.setImageBitmap(BitmapFactory.decodeFile(image.getAbsolutePath()));
+                        //etImg.setText(BitmapFactory.decodeFile(image.getPath()).toString());
                     }
                 }
             }
@@ -346,5 +350,61 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             }
         });
     }
+
+    //Form Validation START
+    @Override
+    public void onValidationSucceeded() {
+        try {
+            pd.show();
+            HashMap<String, RequestBody> map = new HashMap<String, RequestBody>();
+            map.put("no_ktp", createPartFromString(etNoKtp.getText().toString()));
+            map.put("nama", createPartFromString(etNama.getText().toString()));
+            map.put("alamat", createPartFromString(etAlamat.getText().toString()));
+            map.put("email", createPartFromString(etEmail.getText().toString()));
+            map.put("no_hp", createPartFromString(etNoHp.getText().toString()));
+            map.put("pilih_tarif", createPartFromString(etTarif.getSelectedItem().toString()));
+            map.put("regId", createPartFromString(regId));
+
+            File imagefile = new File(part_image);
+            RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"), imagefile);
+            MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(), reqBody);
+
+            apiInterface = ApiClient.getApiInterface();
+            Call<PelangganDaftarModel> pelangganRegCall = apiInterface.uploadImg(partImage, map);
+            pelangganRegCall.enqueue(new Callback<PelangganDaftarModel>() {
+                @Override
+                public void onResponse(Call<PelangganDaftarModel> call, Response<PelangganDaftarModel> response) {
+                    pd.dismiss();
+                    Toast.makeText(PelangganDaftar.this, "Data pendaftaran terkirim", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Call<PelangganDaftarModel> call, Throwable t) {
+                    pd.dismiss();
+                    Toast.makeText(PelangganDaftar.this, "Data pendaftaran gagal terkirim", Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            pd.dismiss();
+            Toast.makeText(PelangganDaftar.this, "Silakan periksa kembali form pendaftaran", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    //Form Validation END
 
 }
