@@ -4,7 +4,9 @@ package com.pdam_mobile.PengaduanFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -50,6 +52,8 @@ public class Monitor_Frag extends Fragment {
 
     ProgressDialog pd;
 
+    SwipeRefreshLayout refreshLayout;
+
     public Monitor_Frag() {
         // Required empty public constructor
     }
@@ -77,12 +81,28 @@ public class Monitor_Frag extends Fragment {
         pd.setMessage("Loading...");
         pd.show();
 
-        refresh();
+        refreshLayout = view.findViewById(R.id.refPengaduan);
+
+        getPengaduan();
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPengaduan();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                },2500);
+            }
+        });
 
         return view;
     }
 
-    private void refresh() {
+    private void getPengaduan() {
         Call<PengaduanData> pengaduanModelCall =
                 apiInterface.pengaduanDataId(sNoPel);
 

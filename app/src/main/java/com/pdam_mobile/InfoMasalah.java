@@ -2,6 +2,8 @@ package com.pdam_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,6 +41,8 @@ public class InfoMasalah extends AppCompatActivity {
     SharedPrefManager prefManager;
     Context context;
 
+    SwipeRefreshLayout refreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +58,28 @@ public class InfoMasalah extends AppCompatActivity {
         mainActivity = this;
         context = this;
 
-        refresh();
+        refreshLayout = findViewById(R.id.refMasalah);
+
+        getMasalah();
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMasalah();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+
+                },2500);
+            }
+        });
 
     }
 
-    public void refresh() {
+    public void getMasalah() {
         Call<MasalahData> masalahModelCall = apiInterface.masalahData();
 
         masalahModelCall.enqueue(new Callback<MasalahData>() {
