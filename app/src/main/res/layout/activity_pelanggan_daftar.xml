@@ -4,209 +4,218 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
     android:orientation="vertical"
-    android:background="#3F51B5"
     tools:context=".PelangganDaftar">
 
     <ImageView
-        android:id="@+id/iconFB"
-        android:layout_margin="16dp"
+        android:id="@+id/iconPdam"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        android:src="@drawable/ic_pdam_bantul"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
-            >
+            android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:elevation="12dp"
-                app:cardCornerRadius="16dp">
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_margin="8dp">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorPrimaryDark">
+
+                        <EditText
+                            android:id="@+id/etNoKtp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="Nomor KTP"
+                            android:inputType="number"
+                            android:maxLength="16"
+                            android:maxLines="1"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorPrimaryDark">
+
+                        <EditText
+                            android:id="@+id/etNama"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="Nama"
+                            android:maxLines="1"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorPrimaryDark">
+
+                        <EditText
+                            android:id="@+id/etEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="Email"
+                            android:maxLines="1"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorPrimaryDark">
+
+                        <EditText
+                            android:id="@+id/etNoHp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="Nomor HP"
+                            android:inputType="phone"
+                            android:maxLength="12"
+                            android:maxLines="1"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat/Lokasi Pasang"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorPrimaryDark">
+
+                        <EditText
+                            android:id="@+id/etAlamat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:clickable="false"
+                            android:editable="false"
+                            android:hint="Koordinat Peta"
+                            android:maxLines="5"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Foto KTP"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imgKtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:src="@drawable/ic_white_black_48dp" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textColorHint="@color/colorHint"
-                    >
+                    android:background="@color/colorWhite">
 
-                    <EditText
-                        android:id="@+id/etNoKtp"
+                    <Spinner
+                        android:id="@+id/etTarif"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Nomor KTP"
-                        android:inputType="number"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textColor="#000"
-                        android:backgroundTint="@color/colorBlack"/>
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/colorHint"
-                    >
-
-                    <EditText
-                        android:id="@+id/etNama"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Nama"
-                        android:maxLines="1"
-                        android:textColor="@color/colorHint"
+                        android:layout_height="match_parent"
                         android:backgroundTint="@color/colorAccent"
-                        />
+                        android:textColor="@color/colorPrimaryDark" />
+
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/colorHint"
-                    >
-
-                    <EditText
-                        android:id="@+id/etEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Email"
-                        android:maxLines="1"
-                        android:textColor="@color/colorHint"
-                        android:backgroundTint="@color/colorAccent"
-                        />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/colorHint"
-                    >
-
-                    <EditText
-                        android:id="@+id/etNoHp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Nomor HP"
-                        android:inputType="phone"
-                        android:maxLength="12"
-                        android:maxLines="1"
-                        android:textColor="@color/colorHint"
-                        android:backgroundTint="@color/colorAccent"
-                        />
-                </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Alamat/Lokasi Pasang"
-                android:textColor="#ffff"
-                android:layout_marginLeft="4dp"
-                />
-
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/colorHint"
-                    >
-
-                    <EditText
-                        android:id="@+id/etAlamat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:clickable="false"
-                        android:hint="Koordinat Peta"
-                        android:maxLines="5"
-                        android:editable="false"
-                        android:textColor="@color/colorHint" />
-                </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Foto KTP"
-                android:textSize="16sp"
-                android:textColor="@color/colorAccent"
-                />
-
-            <ImageView
-                android:id="@+id/imgKtp"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:src="@drawable/ic_white_black_48dp"
-                />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/colorHint"
-                >
-
-                <Spinner
-                    android:id="@+id/etTarif"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:backgroundTint="@color/colorAccent"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnBatal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Batal"
-                android:textColor="#ffff"
-                android:backgroundTint="@color/colorGrey"
-                android:layout_weight="1"
-                />
+                <Button
+                    android:id="@+id/btnBatal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorGrey"
+                    android:text="Batal"
+                    android:textColor="#ffff" />
 
                 <Button
                     android:id="@+id/btnDaftar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Daftar"
-                    android:textColor="#ffff"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
-                    />
+                    android:text="Daftar"
+                    android:textColor="#ffff" />
 
             </LinearLayout>
 

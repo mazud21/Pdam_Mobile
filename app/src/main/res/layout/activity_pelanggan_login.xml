@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3F51B5"
+    android:background="@drawable/gradient_color"
     android:gravity="center"
     tools:context=".PelangganLogin">
 
@@ -21,18 +21,18 @@
             android:layout_margin="8dp">
 
             <ImageView
-                android:id="@+id/iconFB"
-                android:layout_margin="16dp"
+                android:id="@+id/iconPdam"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background"
-                android:layout_width="100dp"
-                android:layout_height="100dp"/>
+                android:src="@drawable/ic_pdam_bantul"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorPrimary"
+                android:background="@color/colorWhite"
                 >
 
                 <EditText
@@ -42,14 +42,17 @@
                     android:hint="No Pelanggan"
                     android:maxLines="1"
                     android:inputType="number"
-                    android:backgroundTint="#ffff"/>
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_margin="8dp"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#ffff"
+                android:textColorHint="@color/colorPrimary"
+                android:background="@color/colorWhite"
                 >
 
                 <EditText
@@ -59,7 +62,8 @@
                     android:hint="Kata Kunci"
                     android:maxLines="1"
                     android:inputType="textPassword"
-                    android:backgroundTint="#ffff"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_margin="8dp"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -68,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Show Password"
+                android:text="Tampilkan Kata Kunci"
                 android:textColor="#ffff"
                 android:buttonTint="#ffff"
                 />
@@ -77,21 +81,9 @@
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:textColor="#ffff"
-                android:backgroundTint="@color/colorPrimary"
-                />
-
-            <TextView
-                android:id="@+id/btnForgot_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="LUPA PASSWORD ?"
-                android:clickable="true"
-                android:textStyle="bold"
-                android:textColor="#ffff"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="Masuk"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorPrimaryDark"
                 />
 
             <LinearLayout
@@ -100,13 +92,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
 
                 <View
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#ffff"
-                    android:layout_margin="5dp"
+                    android:background="@color/colorWhite"
+                    android:layout_weight="1"
                     />
 
                 <TextView
@@ -115,13 +108,13 @@
                     android:layout_height="wrap_content"
                     android:padding="1dp"
                     android:text="ATAU"
-                    android:textColor="#ffff"
+                    android:textColor="@color/colorWhite"
                     />
                 <View
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#ffff"
-                    android:layout_margin="5dp"
+                    android:background="@color/colorWhite"
+                    android:layout_weight="1"
                     />
             </LinearLayout>
 
@@ -130,8 +123,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Daftar Sebagai Pelanggan"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/colorAccent"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorWhite"
                 />
 
             <ProgressBar
