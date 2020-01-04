@@ -184,7 +184,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedName = adapterView.getItemAtPosition(i).toString();
-                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.BLUE);
             }
 
             @Override
