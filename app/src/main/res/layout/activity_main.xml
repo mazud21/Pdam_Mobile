@@ -18,15 +18,11 @@
             android:id="@+id/txtNama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            />
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Logout"
+            android:textSize="20sp"
+            android:hint="sddfsf"
+            android:gravity="center"
+            android:background="@color/colorWhite"
+            android:layout_margin="8dp"
             />
 
         <LinearLayout

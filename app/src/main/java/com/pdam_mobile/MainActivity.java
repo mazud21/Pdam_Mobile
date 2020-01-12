@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -21,8 +24,6 @@ import static com.pdam_mobile.Local.SharedPrefManager.FIREBASE_NOTIF_TOKEN;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogout;
-
     TextView tNama;
 
     SharedPrefManager prefManager;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("Dashboard Pelanggan");
+
         prefManager = new SharedPrefManager(this);
 
         sharedPreferences = getSharedPreferences(SharedPrefManager.SP_PDAM_APP, Activity.MODE_PRIVATE);
@@ -43,21 +46,9 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("token", "onClick: " + FirebaseInstanceId.getInstance().getToken());
 
         tNama = findViewById(R.id.txtNama);
-        tNama.setText(prefManager.getSPNama());
+        tNama.setText("Selamat Datang "+prefManager.getSPNama());
 
         context = this;
-
-        btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
-
-                startActivity(new Intent(context, PelangganLogin.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
-            }
-        });
 
         LinearLayout llDetail = (LinearLayout) findViewById(R.id.lldetail);
         LinearLayout llPengaduan = (LinearLayout) findViewById(R.id.llpengaduan);
@@ -86,5 +77,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_info);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId()==R.id.logout) {
+            prefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+
+            startActivity(new Intent(context, StartActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
+
+        return true;
     }
 }
