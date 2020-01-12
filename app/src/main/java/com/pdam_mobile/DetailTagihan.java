@@ -48,6 +48,8 @@ public class DetailTagihan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tagihan);
 
+        setTitle("Tagihan Air");
+
         recyclerView = (RecyclerView) findViewById(R.id.rvTagihan);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

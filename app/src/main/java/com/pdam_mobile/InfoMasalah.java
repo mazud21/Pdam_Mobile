@@ -48,6 +48,8 @@ public class InfoMasalah extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_masalah);
 
+        setTitle("Informasi Gangguan Air");
+
         recyclerView = (RecyclerView) findViewById(R.id.rvMasalah);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

@@ -109,12 +109,16 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelanggan_daftar);
 
+        setTitle("Pendaftaran Pelanggan");
+
         validator = new Validator(this);
         validator.setValidationListener(this);
 
         pd = new ProgressDialog(this);
         pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
         pd.setMessage("loading ... ");
+
+        pd.dismiss();
 
         requestMultiplePermissions();
 
@@ -171,7 +175,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PelangganDaftar.this, PelangganLogin.class);
+                Intent intent = new Intent(PelangganDaftar.this, StartActivity.class);
                 startActivity(intent);
                 finish();
             }

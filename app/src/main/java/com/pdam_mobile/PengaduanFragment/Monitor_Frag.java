@@ -124,7 +124,8 @@ public class Monitor_Frag extends Fragment {
                     adapter = new PengaduanAdapter(pengaduanDataList);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                    Toast.makeText(context, "Data masih kosong", Toast.LENGTH_SHORT).show();
                 }
             }
 

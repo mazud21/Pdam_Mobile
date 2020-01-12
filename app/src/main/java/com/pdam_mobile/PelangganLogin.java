@@ -60,12 +60,16 @@ public class PelangganLogin extends AppCompatActivity implements Validator.Valid
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelanggan_login);
 
+        setTitle("Login Pelanggan");
+
         validator = new Validator(this);
         validator.setValidationListener(this);
 
         pd = new ProgressDialog(this, R.style.MyAlertDialogStyle);
         pd.setMessage("Loading...");
         context = this;
+
+        pd.dismiss();
 
         etNoPel = findViewById(R.id.noPelanggan);
         etPasPel = findViewById(R.id.passPelanggan);
@@ -77,12 +81,6 @@ public class PelangganLogin extends AppCompatActivity implements Validator.Valid
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         prefManager = new SharedPrefManager(this);
-
-        if (prefManager.getSPSudahLogin()) {
-            startActivity(new Intent(PelangganLogin.this, MainActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-            finish();
-        }
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -99,17 +97,11 @@ public class PelangganLogin extends AppCompatActivity implements Validator.Valid
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pd.show();
                 validator.validate();
             }
         });
 
-        btnReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_register = new Intent(PelangganLogin.this,PelangganDaftar.class);
-                startActivity(intent_register);
-            }
-        });
     }
 
     private void requestLogin() {

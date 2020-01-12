@@ -19,6 +19,8 @@ public class Pengaduan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pengaduan);
 
+        setTitle("Pengaduan Pelanggan");
+
         configureTabLayout();
     }
 
