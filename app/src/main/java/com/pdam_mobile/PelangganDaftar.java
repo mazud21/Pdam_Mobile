@@ -83,7 +83,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
     @NotEmpty(message = "This field required")
     private EditText etAlamat;
     @NotEmpty(message = "This field required")
-    @Pattern(regex = "^08[0-9]{10,}$", message = "Please enter valid Phone number")
+    @Pattern(regex = "^08[0-9]{9,}$", message = "Please enter valid Phone number")
     private EditText etNoHp;
 
     ImageView imgKtp;
