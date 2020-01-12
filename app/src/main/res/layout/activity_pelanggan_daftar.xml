@@ -177,6 +177,16 @@
                     android:layout_height="240dp"
                     android:src="@drawable/ic_white_black_48dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="525dp"
+                        android:src="@drawable/tarif_air" />
+                </LinearLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
