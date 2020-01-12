@@ -44,7 +44,7 @@ public class Monitor_Frag extends Fragment {
 
     Button btnLogout;
 
-    TextView tNama;
+    TextView tNoPel, tNama, tAlamat;
 
     SharedPrefManager prefManager;
     String sNoPel;
@@ -75,7 +75,15 @@ public class Monitor_Frag extends Fragment {
 
         mainActivity = this;
 
+        tNoPel = view.findViewById(R.id.noPell);
         sNoPel = prefManager.getSpNoPelanggan();
+        tNoPel.setText(sNoPel);
+
+        tNama = view.findViewById(R.id.txtNama);
+        tNama.setText(prefManager.getSPNama());
+
+        tAlamat = view.findViewById(R.id.txtAlamat);
+        tAlamat.setText(prefManager.getSpAlamat());
 
         pd = new ProgressDialog(context, R.style.MyAlertDialogStyle);
         pd.setMessage("Loading...");

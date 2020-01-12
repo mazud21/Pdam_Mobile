@@ -45,12 +45,10 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
-import com.mobsandgeeks.saripaar.annotation.Password;
 import com.mobsandgeeks.saripaar.annotation.Pattern;
 import com.pdam_mobile.Local.SharedPrefManager;
 import com.pdam_mobile.Model.TarifModel;
 import com.pdam_mobile.ModelData.TarifData;
-import com.pdam_mobile.ModelPost.PelangganDaftarModel;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 
@@ -64,6 +62,7 @@ import java.util.Locale;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,10 +85,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
     @NotEmpty(message = "This field required")
     @Pattern(regex = "^08[0-9]{10,}$", message = "Please enter valid Phone number")
     private EditText etNoHp;
-    //@NotEmpty(message = "This field required")
-    //public EditText etImg;
 
-    //EditText etNoKtp, etNama, etAlamat, etEmail, etNoHp;
     ImageView imgKtp;
     Button btnDaftar, btnBatal;
     ApiInterface apiInterface;
@@ -156,10 +152,12 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         imgKtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "open gallery"), REQUEST_GALLERY);
+
             }
         });
 
@@ -236,6 +234,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_GALLERY) {
                 Uri dataimage = data.getData();
@@ -255,6 +254,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 }
             }
         }
+
     }
 
     private RequestBody createPartFromString(String s) {
@@ -372,10 +372,10 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(), reqBody);
 
             apiInterface = ApiClient.getApiInterface();
-            Call<PelangganDaftarModel> pelangganRegCall = apiInterface.uploadImg(partImage, map);
-            pelangganRegCall.enqueue(new Callback<PelangganDaftarModel>() {
+            Call<ResponseBody> pelangganRegCall = apiInterface.uploadImg(partImage, map);
+            pelangganRegCall.enqueue(new Callback<ResponseBody>() {
                 @Override
-                public void onResponse(Call<PelangganDaftarModel> call, Response<PelangganDaftarModel> response) {
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     pd.dismiss();
                     Toast.makeText(PelangganDaftar.this, "Data pendaftaran terkirim", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(PelangganDaftar.this, PelangganLogin.class);
@@ -384,7 +384,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 }
 
                 @Override
-                public void onFailure(Call<PelangganDaftarModel> call, Throwable t) {
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
                     pd.dismiss();
                     Toast.makeText(PelangganDaftar.this, "Data pendaftaran gagal terkirim", Toast.LENGTH_LONG).show();
                 }
@@ -411,5 +411,4 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
         }
     }
     //Form Validation END
-
 }

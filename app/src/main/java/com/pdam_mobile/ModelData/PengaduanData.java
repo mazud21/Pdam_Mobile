@@ -13,20 +13,8 @@ public class PengaduanData {
     @SerializedName("data")
     List<PengaduanModel> pengaduanDataList;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public List<PengaduanModel> getPengaduanDataList() {
         return pengaduanDataList;
-    }
-
-    public void setPengaduanDataList(List<PengaduanModel> pengaduanDataList) {
-        this.pengaduanDataList = pengaduanDataList;
     }
 }
 

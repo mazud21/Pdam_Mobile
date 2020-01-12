@@ -14,11 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pdam_mobile.Local.SharedPrefManager;
-import com.pdam_mobile.ModelPost.PengaduanModelPost;
 import com.pdam_mobile.NetworkService.ApiClient;
 import com.pdam_mobile.NetworkService.ApiInterface;
 import com.pdam_mobile.R;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +29,7 @@ import retrofit2.Response;
  */
 public class Pengaduan_Frag extends Fragment {
 
-    TextView tNoPel;
+    TextView tNoPel, tNama, tAlamat;
     EditText eIsiKeluhan;
     Button btnKeluhan;
 
@@ -58,6 +58,12 @@ public class Pengaduan_Frag extends Fragment {
         tNoPel = view.findViewById(R.id.noPell);
         tNoPel.setText(prefManager.getSpNoPelanggan());
 
+        tNama = view.findViewById(R.id.txtNama);
+        tNama.setText(prefManager.getSPNama());
+
+        tAlamat = view.findViewById(R.id.txtAlamat);
+        tAlamat.setText(prefManager.getSpAlamat());
+
         eIsiKeluhan = view.findViewById(R.id.isiKeluhan);
 
         btnKeluhan = view.findViewById(R.id.btnKeluhan);
@@ -80,23 +86,22 @@ public class Pengaduan_Frag extends Fragment {
 
     private void requestKeluhan() {
         //post keluhan process
-        Call<PengaduanModelPost> responseBodyCall =
+        Call<ResponseBody> responseBodyCall =
                 apiInterface.postPengaduan(
                         tNoPel.getText().toString(),
                         eIsiKeluhan.getText().toString()
                 );
-        responseBodyCall.enqueue(new Callback<PengaduanModelPost>() {
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<PengaduanModelPost> call, Response<PengaduanModelPost> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 pd.dismiss();
                 Toast.makeText(context, "Keluhan Terkirim", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<PengaduanModelPost> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
         });
     }
 }
-

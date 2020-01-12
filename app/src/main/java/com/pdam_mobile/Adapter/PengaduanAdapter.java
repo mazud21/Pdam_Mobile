@@ -32,10 +32,6 @@ public class PengaduanAdapter extends RecyclerView.Adapter<PengaduanAdapter.View
 
     @Override
     public void onBindViewHolder(@NotNull PengaduanAdapter.ViewHolder viewHolder, int i) {
-        //viewHolder.mTxtNoInfo.setText(masalahDataList.get(i).getNo_info());
-        viewHolder.mTxtNama.setText(pengaduanDataList.get(i).getNama());
-        viewHolder.mTxtAlamat.setText(pengaduanDataList.get(i).getAlamat());
-        viewHolder.mTxtNoHp.setText(pengaduanDataList.get(i).getNo_hp());
         viewHolder.mTxtKeluhan.setText(pengaduanDataList.get(i).getKeluhan());
         viewHolder.mTxtTanggapan.setText(pengaduanDataList.get(i).getTanggapan());
     }
@@ -46,14 +42,10 @@ public class PengaduanAdapter extends RecyclerView.Adapter<PengaduanAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mTxtNoInfo, mTxtNama, mTxtAlamat, mTxtNoHp, mTxtKeluhan, mTxtTanggapan ;
+        TextView mTxtKeluhan, mTxtTanggapan ;
 
         ViewHolder( View itemView) {
             super(itemView);
-            //mTxtNoInfo = (TextView) itemView.findViewById(R.id.txtNoInfo);
-            mTxtNama = (TextView) itemView.findViewById(R.id.txtNama);
-            mTxtAlamat = (TextView) itemView.findViewById(R.id.txtAlamat);
-            mTxtNoHp = (TextView) itemView.findViewById(R.id.txtNoHp);
             mTxtKeluhan = (TextView) itemView.findViewById(R.id.isiKeluhan);
             mTxtTanggapan = (TextView) itemView.findViewById(R.id.isiTanggapan);
         }

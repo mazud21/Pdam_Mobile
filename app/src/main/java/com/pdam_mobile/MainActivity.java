@@ -21,8 +21,6 @@ import static com.pdam_mobile.Local.SharedPrefManager.FIREBASE_NOTIF_TOKEN;
 
 public class MainActivity extends AppCompatActivity {
 
-    ApiInterface apiInterface;
-
     Button btnLogout;
 
     TextView tNama;
@@ -42,11 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic("infomasalah");
         Log.d("FIREBASE_NOTIF_TOKEN", sharedPreferences.getString(FIREBASE_NOTIF_TOKEN, ""));
-        Log.d("token", "onClick: " + FirebaseInstanceId.getInstance().getToken());
+        //Log.d("token", "onClick: " + FirebaseInstanceId.getInstance().getToken());
 
         tNama = findViewById(R.id.txtNama);
         tNama.setText(prefManager.getSPNama());
-        //tNama.setText(String.valueOf(prefManager.getSpNoPelanggan()));
 
         context = this;
 
