@@ -34,10 +34,6 @@ public class InfoMasalah extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public static InfoMasalah mainActivity;
 
-    Button btnLogout;
-
-    TextView tNama;
-
     SharedPrefManager prefManager;
     Context context;
 
@@ -50,7 +46,7 @@ public class InfoMasalah extends AppCompatActivity {
 
         setTitle("Informasi Gangguan Air");
 
-        recyclerView = (RecyclerView) findViewById(R.id.rvMasalah);
+        recyclerView = findViewById(R.id.rvMasalah);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         apiInterface = ApiClient.getClient().create(ApiInterface.class);

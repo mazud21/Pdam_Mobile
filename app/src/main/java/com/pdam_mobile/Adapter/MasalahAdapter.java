@@ -30,11 +30,12 @@ public class MasalahAdapter extends RecyclerView.Adapter<MasalahAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NotNull MasalahAdapter.ViewHolder viewHolder, int i) {
-        //viewHolder.mTxtNoInfo.setText(masalahDataList.get(i).getNo_info());
         viewHolder.mTxtWilayah.setText(masalahDataList.get(i).getWilayah());
         viewHolder.mTxtHari.setText(masalahDataList.get(i).getHari());
         viewHolder.mTxtTanggal.setText(masalahDataList.get(i).getTanggal());
         viewHolder.mTxtEstimasi.setText(masalahDataList.get(i).getEstimasi());
+        viewHolder.mTxtEstMulai.setText(masalahDataList.get(i).getEst_mulai());
+        viewHolder.mTxtEstSelesai.setText(masalahDataList.get(i).getEst_selesai());
         viewHolder.mTxtKerusakan.setText(masalahDataList.get(i).getKerusakan());
         viewHolder.mTxtAlternatif.setText(masalahDataList.get(i).getAlternatif());
         viewHolder.mTxtPenanganan.setText(masalahDataList.get(i).getPenanganan());
@@ -46,18 +47,19 @@ public class MasalahAdapter extends RecyclerView.Adapter<MasalahAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mTxtNoInfo, mTxtWilayah, mTxtHari, mTxtTanggal, mTxtEstimasi, mTxtKerusakan, mTxtAlternatif, mTxtPenanganan;
+        TextView mTxtWilayah, mTxtHari, mTxtTanggal, mTxtEstimasi, mTxtEstMulai, mTxtEstSelesai, mTxtKerusakan, mTxtAlternatif, mTxtPenanganan;
 
         ViewHolder( View itemView) {
             super(itemView);
-            //mTxtNoInfo = (TextView) itemView.findViewById(R.id.txtNoInfo);
-            mTxtWilayah = (TextView) itemView.findViewById(R.id.txtNama);
-            mTxtHari = (TextView) itemView.findViewById(R.id.txtAlamat);
-            mTxtTanggal = (TextView) itemView.findViewById(R.id.txtNoHp);
-            mTxtEstimasi = (TextView) itemView.findViewById(R.id.txtBulanBayar);
-            mTxtKerusakan = (TextView) itemView.findViewById(R.id.txtKerusakan);
-            mTxtAlternatif = (TextView) itemView.findViewById(R.id.txtAlternatif);
-            mTxtPenanganan = (TextView) itemView.findViewById(R.id.txtPenanganan);
+            mTxtWilayah = itemView.findViewById(R.id.txtNama);
+            mTxtHari = itemView.findViewById(R.id.txtAlamat);
+            mTxtTanggal = itemView.findViewById(R.id.txtNoHp);
+            mTxtEstimasi = itemView.findViewById(R.id.txtEstimasi);
+            mTxtEstMulai = itemView.findViewById(R.id.txtEstMulai);
+            mTxtEstSelesai = itemView.findViewById(R.id.txtEstSelesai);
+            mTxtKerusakan = itemView.findViewById(R.id.txtKerusakan);
+            mTxtAlternatif = itemView.findViewById(R.id.txtAlternatif);
+            mTxtPenanganan = itemView.findViewById(R.id.txtPenanganan);
         }
     }
 }

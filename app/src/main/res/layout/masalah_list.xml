@@ -16,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -104,7 +103,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/txtBulanBayar"
+                    android:id="@+id/txtEstimasi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
@@ -115,6 +114,47 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Perbaikan Mulai"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/txtEstMulai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EstM"
+                        android:textAlignment="viewEnd"
+                        android:textSize="16sp"
+                        android:layout_weight="0"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" s/d "
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txtEstSelesai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="EstiS"
+                        android:textAlignment="viewEnd"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
