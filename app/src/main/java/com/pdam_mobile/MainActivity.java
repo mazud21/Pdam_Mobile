@@ -4,21 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.pdam_mobile.Local.SharedPrefManager;
-import com.pdam_mobile.NetworkService.ApiInterface;
 
 import static com.pdam_mobile.Local.SharedPrefManager.FIREBASE_NOTIF_TOKEN;
 
@@ -50,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
 
-        LinearLayout llDetail = (LinearLayout) findViewById(R.id.lldetail);
-        LinearLayout llPengaduan = (LinearLayout) findViewById(R.id.llpengaduan);
-        LinearLayout llInfo = (LinearLayout) findViewById(R.id.llinfo);
+        LinearLayout llDetail = findViewById(R.id.lldetail);
+        LinearLayout llPengaduan = findViewById(R.id.llpengaduan);
+        LinearLayout llInfo = findViewById(R.id.llinfo);
+        LinearLayout llKontak = findViewById(R.id.llKontak);
 
         llDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent_info = new Intent(MainActivity.this, InfoMasalah.class);
+                startActivity(intent_info);
+            }
+        });
+
+        llKontak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_info = new Intent(MainActivity.this, Kontak.class);
                 startActivity(intent_info);
             }
         });

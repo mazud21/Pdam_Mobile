@@ -21,12 +21,13 @@
     <application
         android:name=".NetworkService.MainApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_pdam_bantul"
+        android:icon="@drawable/pdam_bantul"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_pdam_bantul"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PelangganLogin"></activity>
+        <activity android:name=".Kontak"></activity>
+        <activity android:name=".PelangganLogin" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -65,9 +66,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".StartActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
+        <activity
+            android:name=".StartActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
