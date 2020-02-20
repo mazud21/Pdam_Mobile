@@ -62,7 +62,8 @@ public class Pengaduan_Frag extends Fragment {
         tNama.setText(prefManager.getSPNama());
 
         tAlamat = view.findViewById(R.id.txtAlamat);
-        tAlamat.setText(prefManager.getSpAlamat());
+        //tAlamat.setText(prefManager.getSpAlamat());
+        tAlamat.setText(prefManager.getSpAlamat().substring(9, 50));
 
         eIsiKeluhan = view.findViewById(R.id.isiKeluhan);
 
@@ -77,14 +78,14 @@ public class Pengaduan_Frag extends Fragment {
             public void onClick(View view) {
                 //pd = ProgressDialog.show(context, null,"Loading...", true, false);
                 pd.show();
-                requestKeluhan();
+                sendPengaduan();
             }
         });
 
         return view;
     }
 
-    private void requestKeluhan() {
+    private void sendPengaduan() {
         //post keluhan process
         Call<ResponseBody> responseBodyCall =
                 apiInterface.postPengaduan(

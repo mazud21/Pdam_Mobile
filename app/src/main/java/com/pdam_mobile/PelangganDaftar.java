@@ -3,6 +3,7 @@ package com.pdam_mobile;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -87,7 +88,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
     private EditText etNoHp;
 
     ImageView imgKtp;
-    Button btnDaftar, btnBatal;
+    Button btnDaftar, btnBatal, btnPerkiraan;
     ApiInterface apiInterface;
 
     GoogleMap mMap;
@@ -140,6 +141,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        btnPerkiraan = findViewById(R.id.btnPerkiraan);
         btnDaftar = findViewById(R.id.btnDaftar);
         btnBatal = findViewById(R.id.btnBatal);
 
@@ -162,6 +164,16 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "open gallery"), REQUEST_GALLERY);
 
+            }
+        });
+
+        btnPerkiraan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_perkiraan);
+                dialog.setTitle("Perkiraan Biaya Instalasi");
+                dialog.show();
             }
         });
 
@@ -376,7 +388,7 @@ public class PelangganDaftar extends FragmentActivity implements OnMapReadyCallb
             MultipartBody.Part partImage = MultipartBody.Part.createFormData("foto_ktp", imagefile.getName(), reqBody);
 
             apiInterface = ApiClient.getApiInterface();
-            Call<ResponseBody> pelangganRegCall = apiInterface.uploadImg(partImage, map);
+            Call<ResponseBody> pelangganRegCall = apiInterface.postPendaftar(partImage, map);
             pelangganRegCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

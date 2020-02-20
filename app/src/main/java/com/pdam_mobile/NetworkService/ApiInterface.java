@@ -40,8 +40,8 @@ public interface ApiInterface {
                                      @Field("keluhan") String keluhan);
     @Multipart
     @POST("Pdam_pelanggan")
-    Call<ResponseBody> uploadImg (@Part MultipartBody.Part image,
-                                  @PartMap Map<String, RequestBody> text);
+    Call<ResponseBody> postPendaftar(@Part MultipartBody.Part image,
+                                     @PartMap Map<String, RequestBody> text);
     @GET("Pdam_tarif")
     Call<TarifData> getTarifData();
 }

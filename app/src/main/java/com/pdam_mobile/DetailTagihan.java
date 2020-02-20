@@ -67,7 +67,7 @@ public class DetailTagihan extends AppCompatActivity {
         tNama.setText(prefManager.getSPNama());
 
         tAlamat = findViewById(R.id.txtAlamat);
-        tAlamat.setText(prefManager.getSpAlamat());
+        tAlamat.setText(prefManager.getSpAlamat().substring(9, 50));
 
         detailTagihan = this;
         context = this;

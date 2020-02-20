@@ -5,4 +5,14 @@
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sem sem, pellentesque id leo eu, mattis pharetra ligula. Suspendisse rhoncus ante velit, sit amet sagittis lacus pulvinar dapibus. Praesent sit amet fringilla ligula. Ut at nunc sed ligula fermentum interdum. In eleifend tortor ut aliquam pretium. Suspendisse nulla enim, lacinia in malesuada et, egestas et dui. Donec blandit tincidunt auctor. Nullam iaculis auctor justo, et aliquam massa imperdiet id. Nulla sollicitudin elit at odio tempor, et elementum metus fringilla. Ut ex diam, convallis pellentesque dictum rutrum, placerat nec justo. Sed sit amet urna metus.
     </string>
+
+    <!--FORM VALIDATION-->
+    <string name="no_ktp">Enter a valid ID</string>
+    <string name="nama">Enter a valid Name</string>
+    <string name="email">Enter a valid Email</string>
+    <string name="no_hp">Enter a valid NO HP</string>
+
+    <string name="no_pel">Enter a valid No Pelanggan</string>
+
+    <string name="titik">...</string>
 </resources>

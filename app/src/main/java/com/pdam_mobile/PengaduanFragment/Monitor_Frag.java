@@ -83,7 +83,8 @@ public class Monitor_Frag extends Fragment {
         tNama.setText(prefManager.getSPNama());
 
         tAlamat = view.findViewById(R.id.txtAlamat);
-        tAlamat.setText(prefManager.getSpAlamat());
+        //tAlamat.setText(prefManager.getSpAlamat());
+        tAlamat.setText(prefManager.getSpAlamat().substring(9, 50));
 
         pd = new ProgressDialog(context, R.style.MyAlertDialogStyle);
         pd.setMessage("Loading...");
