@@ -26,7 +26,8 @@
         android:roundIcon="@drawable/ic_pdam_bantul"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Kontak"></activity>
+        <activity android:name=".Profile"/>
+        <activity android:name=".Kontak" />
         <activity android:name=".PelangganLogin" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

@@ -1,6 +1,7 @@
 package com.pdam_mobile.NetworkService;
 
 import com.pdam_mobile.ModelData.MasalahData;
+import com.pdam_mobile.ModelData.PelangganData;
 import com.pdam_mobile.ModelData.PengaduanData;
 import com.pdam_mobile.ModelData.TagihanDataId;
 import com.pdam_mobile.ModelData.TarifData;
@@ -23,6 +24,9 @@ import retrofit2.http.Query;
 public interface ApiInterface {
     @GET("Pdam_masalah")
     Call<MasalahData> masalahData();
+
+    @GET("Pdam_pelanggan")
+    Call<PelangganData> pelangganData(@Query("no_pelanggan") String no_pelanggan);
 
     @FormUrlEncoded
     @POST("Pdam_pelangganLogin")

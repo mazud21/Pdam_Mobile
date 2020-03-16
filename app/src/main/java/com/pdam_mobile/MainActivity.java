@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SharedPrefManager.SP_PDAM_APP, Activity.MODE_PRIVATE);
 
         FirebaseMessaging.getInstance().subscribeToTopic("infomasalah");
+
         Log.d("FIREBASE_NOTIF_TOKEN", sharedPreferences.getString(FIREBASE_NOTIF_TOKEN, ""));
         //Log.d("token", "onClick: " + FirebaseInstanceId.getInstance().getToken());
 
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(context, StartActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
+        } else if (item.getItemId()==R.id.profile){
+            startActivity(new Intent(context, Profile.class));
         }
 
         return true;

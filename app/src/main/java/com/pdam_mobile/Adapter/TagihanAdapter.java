@@ -1,13 +1,12 @@
 package com.pdam_mobile.Adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pdam_mobile.Model.PelangganModel;
 import com.pdam_mobile.Model.TagihanModel;
 import com.pdam_mobile.R;
 
